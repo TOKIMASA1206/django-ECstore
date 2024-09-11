@@ -1,0 +1,13 @@
+.categories_btn{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+@media (max-width: 768px) {
+  .btn-blue-outline,
+  .btn-blue {
+    padding: 4px 8px;
+    font-size: 10px;
+}
+}

@@ -1,0 +1,200 @@
+
+
+.header{
+  background-color: var(--colorMain);
+  padding: 15px;
+  top:0;
+  position: fixed;
+  width: 100%;
+  z-index: 1200;
+}
+
+.header input{
+  width: 100%;
+}
+
+.logo a{
+  display: flex;
+  align-items: center;
+  text-align: center; 
+}
+
+.logo img{
+  width: 50px;
+  height: 50px;
+}
+.logo .logo_title{
+  font-weight: bold;
+  color : var(--colorWhite);
+  font-size: 20px;
+}
+
+.header .form-control{
+  width: 220px; 
+  height: 35px;
+  font-size: 14px;
+}
+.header_icon{
+  display: inline-block;    
+  margin-left: 10px;    
+  color: var(--colorWhite);         
+  font-size: 18px;     
+  font-weight: normal; 
+  text-decoration: none; 
+  transform: all 0.3 ease;
+}
+
+.header_icon:hover{
+  color: var(--colorWhite)
+}
+
+.cart_count{
+  background-color: var(--colorRed);
+  font-size: 10px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  text-align: center;
+  right: -5px;
+  top: -4px;
+}
+
+
+/* ============ Hamburgar Menu ============== */
+
+
+
+#menu-toggle {
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#navbarNav {
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 66px;
+  right: 0;
+  padding: 20px 0;
+  background-color: var(--colorMain);
+  width: 230px;
+  transform: translateX(100%);
+  transition: all 0.5s ease;
+  z-index: 1000;
+}
+
+#navbarNav.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+#navbarNav .header_icon {
+  width: 100%;
+  padding: 14px 5px;
+  font-size: 12px;
+  border-bottom:1px solid rgba(246, 245, 245, 0.3);
+}
+
+
+
+#navbarNav .nav_column {
+  color: var(--colorwhite);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.sub_menu {
+  width: 100%;
+  z-index: 1000;
+  background-color: var(--colorWhite); 
+  padding: 14px 0;
+  position: fixed;
+  top: 60px;
+}
+
+.sub_menu .menu_item {
+  color: var(--colorBlack);
+  font-size: 12px;
+  font-weight: bold;
+  padding: 14px;
+}
+
+.sub_menu .menu_item:hover {
+  color: var(--colorRed);
+}
+
+
+
+/* メニュー ドロワー */
+
+.drawer__menu {
+  display: block;
+  padding: 6px 0;
+}
+
+#js-drawer {
+  position: relative;
+  transition: opacity 0.5s ease, transform 0.5s ease; 
+}
+
+#js-drawer:hover .drawer {
+  opacity: 1;
+  transform: translateY(0);
+  display: block; 
+}
+
+.drawer {
+  background-color: rgb(212,212,212);
+  width: 90px;
+  position: absolute;
+  top: 35px;
+  left: 0;
+  opacity: 0;
+  display: none;
+  transform: translateY(-10px);
+}
+
+.drawer a {
+  color: var(--colorBlack);
+  border-bottom: 1px solid rgba(99, 97, 97, 0.8);
+  padding: 8px;
+  font-weight: 300;
+  font-size: 12px;
+  text-align: left;
+  display: block;
+}
+
+.drawer a:hover {
+  color: var(--colorRed);
+}
+
+
+
+
+
+@media (max-width: 768px) {
+  .header .form-control{
+    width: 150px; 
+  }
+
+  .logo .logo_title{
+    font-size: 18px;
+  }
+
+  .header_icon:hover{
+    color: var(--colorWhite);
+    transform: scale(1.05);
+  }
+}
+
+
+
+@media (min-width: 768px) {
+  #menu-toggle {
+    display: none;
+  }
+
+}

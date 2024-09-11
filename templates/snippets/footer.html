@@ -1,0 +1,37 @@
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/footer.css' %}" />
+{% endblock %}
+
+
+<div class="footer">
+  <div class="footer_item">
+    <div class="container">
+      <div class="footer_menu">
+        <a href="" class="menu_item">Contact</a>
+        <a href="" class="menu_item">Legal Notice</a>
+        <a href="" class="menu_item">Privacy Police</a>
+        <a href="" class="menu_item">Refond Policy</a>
+        <a href="" class="menu_item">Terms Of Service</a>
+      </div>
+    </div>
+  </div>
+  <div class="row text-center mx-auto align-items-center ">
+    <div class="col-auto footer_logo ">
+      <a href="">
+        {% load static %}
+        <img src="{% static 'images/logo.png' %}" />
+        <span>{{TITLE}}</span>
+      </a>
+    </div>
+    <div class=" col "><small>©{{TITLE}} All Rights Reserved.</small></div>
+    <div class=" col-2 sns ">
+      <a href="" class="">
+        <i class="fa-brands fa-twitter"></i>
+      </a>
+      <a href="" class="">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+    </div>
+  </div>
+</div>

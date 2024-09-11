@@ -1,0 +1,160 @@
+
+
+.btn-main {
+    background-color: #3047f4;
+    color: var(--colorWhite);
+    border: none;
+    padding: 6px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-main:hover {
+    background-color: #2539cd;
+}
+
+.btn-blue {
+    background-color: var(--colorMain);
+    color: var(--colorWhite);
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-blue:hover {
+    background-color: #051275;
+    color: var(--colorWhite);
+}
+.btn-red {
+    background-color: var(--colorRed);
+    color: var(--colorWhite);
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-red:hover {
+    background-color: #ed1c14;
+    color: var(--colorWhite);
+}
+
+.btn-red-outline {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: var(--colorRed);
+    border-radius: 0.25rem;
+    border: 1px solid var(--colorRed);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-red-outline:hover {
+    background-color: var(--colorRed);
+    color: var(--colorWhite);
+}
+
+
+.btn-blue-outline {
+    background-color: var(--colorWhite);
+    color: var(--colorMain);
+    border: solid 1px var(--colorMain);
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-blue-outline:hover {
+    background-color: var(--colorMain);
+    color: var(--colorWhite);
+}
+
+.btn-yellow-black {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: var(--colorWhite);
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    border: none;
+    background-color: #FFB11B;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-yellow-black:hover {
+    background-color: var(--colorBlack);
+    border-color: var(--colorBlack);
+}
+
+.btn-blue-black {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: var(--colorWhite);
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    border: none;
+    background-color: var(--colorMain);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-blue-black:hover {
+    background-color: var(--colorBlack);
+    border-color: var(--colorBlack);
+}
+.btn-red-black {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: var(--colorWhite);
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    border: none;
+    background-color: #FC544B;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-red-black:hover {
+    background-color: var(--colorBlack);
+    border-color: var(--colorBlack);
+}
+.btn-yellow-black {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: var(--colorWhite);
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    border: none;
+    background-color: #FFB11B;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-yellow-black:hover {
+    background-color: var(--colorBlack);
+    border-color: var(--colorBlack);
+}
+
+.view-more{
+    font-size: 14px;
+    color: var(--colorRed);
+}
+
+.view-more:hover {
+    color: #ed1c14;
+}

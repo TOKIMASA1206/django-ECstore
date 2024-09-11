@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/item.css' %}" />
+{% endblock %}
+
+{% block main %}
+  <div class="container">
+    <div class="row my-5">
+      <div class="col-12 col-md-7 mt-5">
+        <div class="card overflow-hidden mb-5">
+          <img src="/{{ object.image }}" width="100%" />
+        </div>
+
+        <div class="mb-4">
+          <h2 class="section_title">Description</h2>
+          <hr />
+          <p class="item_description">{{ object.description }}</p>
+        </div>
+      </div>
+      <div class="col-12 col-md-5 mt-5 sticky-container">
+        <div class="card p-3">
+          <p class="item_name m-0 fw-bold">{{ object.name }}</p>
+          <p class="">
+            <a href="/categories/{{ object.category.slug }}/" class="badge badge-pill badge-warning">{{ object.category.name }}</a>
+            {% for tag in object.tags.all %}
+              <a href="/tags/{{ tag.slug }}/" class="badge badge-pill badge-light">#{{ tag }}</a>
+            {% endfor %}
+          </p>
+          {% if object.stock == 0 %}
+            <p></p>
+          {% elif object.stock == 1 %}
+            <p class="item_stock p-0 m-0">{{ object.stock }} Item Left!</p>
+          {% else %}
+            <p class="item_stock p-0 m-0">{{ object.stock }} Items Left!</p>
+          {% endif %}
+
+          <p class="item_price p-0 ">{{ object.price }} JPY (excluding tax)</p>
+
+          <form action="/cart/add/" method="POST" class="">
+            {% csrf_token %}
+            <input type="hidden" name="item_pk" value="{{ object.pk }}" />
+            <p class="item_quantity">
+              <input type="number" class="form-control d-inline text-center" name="quantity" value="1" min='1' max="{{ object.stock }}"/> item
+            </p>
+            <p>
+              {% if object.stock == 0 %}
+                <button type="submit" class="btn-red w-100" disabled>Sold Out</button>
+              {% else %}
+                <button type="submit" class="btn-main w-100">Add to cart</button>
+              {% endif %}
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+
+    <h2 class="section_title">You May Also Like</h2>
+    <div class="row mb-5">
+      {% for object in ADDTIONAL_ITEMS %}
+      <div class="col-6 col-md-4 col-lg-3 my-3">
+        {% include 'snippets/item_add_box.html' %}
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+  </div>
+{% endblock %}

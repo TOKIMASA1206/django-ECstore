@@ -1,0 +1,24 @@
+.order table{
+  font-size: 14px;
+  text-align: center;
+}
+.order table td,
+.order table th
+{
+  vertical-align: middle;
+}
+
+.order img{
+  max-width: 200px;
+}
+
+
+@media (max-width: 768px) {
+  .order table{
+    font-size: 10px;
+    text-align: center;
+  }
+  .cat_icon{
+    font-size: 120px;
+  }
+}

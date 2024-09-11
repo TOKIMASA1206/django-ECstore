@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/order.css' %}" />
+{% endblock %}
+
+ 
+{% block main %}
+ 
+<div class="container my-5">
+  <div class="row order">
+    <div class="col-12">
+      <h1 class="section_title my-3">Order Infomation</h1>
+      <table class="table mb-5 text-left">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">No.</th>
+            <td>{{object.pk}}</td>
+          </tr>
+          <tr>
+            <th scope="row">金額</th>
+            <td>{{object.amount}}</td>
+          </tr>
+          <tr>
+            <th scope="row">税込</th>
+            <td>{{object.tax_included}}</td>
+          </tr>
+ 
+          <tr>
+            <th scope="row">注文確定日</th>
+            <td>{{object.created_at|date:"Y-m-d f"}}</td>
+          </tr>
+          <tr>
+            <th scope="row">UID</th>
+            <td>{{object.uid}}</td>
+          </tr>
+          <tr>
+            <th scope="row">郵便番号</th>
+            <td>{{shipping.0.fields.zipcode}}</td>
+          </tr>
+          <tr>
+            <th scope="row">都道府県</th>
+            <td>{{shipping.0.fields.prefecture}}</td>
+          </tr>
+          <tr>
+            <th scope="row">市区</th>
+            <td>{{shipping.0.fields.city}}</td>
+          </tr>
+          <tr>
+            <th scope="row">住所1</th>
+            <td>{{shipping.0.fields.address1}}</td>
+          </tr>
+          <tr>
+            <th scope="row">住所2</th>
+            <td>{{shipping.0.fields.address2}}</td>
+          </tr>
+          <tr>
+            <th scope="row">電話番号</th>
+            <td>{{shipping.0.fields.tel}}</td>
+          </tr>
+        </tbody>
+      </table>
+ 
+ 
+      <h2 class=" section_title my-4">Order Status</h2>
+      <div>
+        {% if object.shipped_at %}
+        <div class="my-3 ">
+          <button class="btn btn-primary" disabled>発送済み: {{object.shipped_at}}</button>
+        </div>
+        {% else %}
+        <div class="my-3 ">
+          <button class="btn btn-secondary" disabled>未発送</button>
+        </div>
+        {% endif %}
+        {% if object.canceled_at %}
+        <div class="my-3 ">
+          <button class="btn btn-danger" disabled>キャンセル済み: {{object.canceled_at}}</button>
+        </div>
+        {% endif %}
+      </div>
+ 
+      <h2 class=" section_title my-4">Order Item List</h2>
+      <table class="table mb-5 text-center">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">IMAGE</th>
+            <th scope="col">NAME</th>
+            <th scope="col">PRICE</th>
+            <th scope="col">QUANTITY</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in items %}
+          <tr>
+            <th scope="row fw-bold">{{ forloop.counter }}</th>
+            <td><img src="/{{item.image}}" width="auto" height="100px"></td>
+            <td>{{ item.name }}</td>
+            <td>¥{{item.price}}</td>
+            <td>{{item.quantity}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+ 
+{% endblock %}

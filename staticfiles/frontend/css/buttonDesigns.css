@@ -1,0 +1,115 @@
+
+
+.btn-blue {
+    background-color: var();
+    color: white;
+    border: none;
+    padding: 6px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-blue:hover {
+    background-color: #3047f4;
+}
+
+.btn-red-outline {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: var(--colorRed);
+    border-radius: 0.25rem;
+    border: 1px solid var(--colorRed);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-red-outline:hover {
+    background-color: var(--colorRed);
+    color: var(--colorWhite);
+}
+
+
+.btn-blue-outline {
+    background-color: white;
+    color: var(--colorMain);
+    border: solid 1px var(--colorMain);
+    padding: 6px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-yellow-black {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    border: none;
+    background-color: #FFB11B;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-yellow-black:hover {
+    background-color: var(--colorBlack);
+    border-color: var(--colorBlack);
+}
+
+.btn-blue-black {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    border: none;
+    background-color: var(--colorMain);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-blue-black:hover {
+    background-color: var(--colorBlack);
+    border-color: var(--colorBlack);
+}
+.btn-red-black {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    border: none;
+    background-color: #FC544B;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-red-black:hover {
+    background-color: var(--colorBlack);
+    border-color: var(--colorBlack);
+}
+.btn-yellow-black {
+    font-size: 14px;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 0.25rem;
+    border: 1px solid transparent;
+    border: none;
+    background-color: #FFB11B;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-yellow-black:hover {
+    background-color: var(--colorBlack);
+    border-color: var(--colorBlack);
+}

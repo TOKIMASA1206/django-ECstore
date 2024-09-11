@@ -1,0 +1,40 @@
+.item_name{
+  font-size: 16px;
+  color: var(--colorBlack);
+  margin: 0;
+}
+
+.item_price{
+  display: block;
+  font-size: 14px;
+  color: var(--colorBlack);
+}
+
+.item_category{
+  display: block;
+  opacity: 0.8;
+  font-size: 12px;
+  color:var(--colorRed)
+}
+
+@media (max-width: 768px) {
+
+  .item_name{
+    font-size: 14px;
+  }
+  
+  .item_price{
+    display: block;
+    font-size: 12px;
+    color: var(--colorBlack);
+  }
+  
+  .item_category{
+    display: block;
+    opacity: 0.8;
+    font-size: 10px;
+    color:var(--colorRed)
+  }
+  
+
+}

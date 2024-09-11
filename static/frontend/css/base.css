@@ -1,0 +1,74 @@
+body{
+  font-family: "Palanquin Dark", sans-serif !important;
+  font-weight: 400;
+  font-style: normal;
+  overflow-x: hidden;
+}
+
+a{
+  text-decoration: none !important;
+}
+
+ul,
+li{
+  list-style: none;
+}
+
+
+
+:root {
+  --colorMain: #0B0364;
+  --colorYellow: #FFD100;
+  --colorPurple: #B7BAE7;
+  --colorGray: #F4F3F1;
+  --colorRed: #fa1810;
+  --colorBlack: #010f1c;
+  --colorWhite: #ffffff;
+}
+
+
+
+/* ===============  Common Style ============ */
+
+main{
+  margin-top: 110px;
+}
+
+section{
+  margin-top: 50px;
+}
+
+.section_title{
+  font-size: 28px;
+}
+
+.section_item{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.container-fluid{
+  max-width: 1250px;
+}
+
+.inform_icon{
+  font-size: 200px;
+}
+
+
+
+@media (max-width: 768px) {
+  section{
+    margin-top: 30px;
+  }
+  
+  .section_title{
+    font-size: 22px;
+  }
+
+  .inform_icon{
+    font-size: 120px;
+  }
+
+}

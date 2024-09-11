@@ -1,0 +1,31 @@
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/item_box.css' %}" />
+{% endblock %}
+
+<div class="border">
+  <a href="/items/{{ object.pk }}/"><img src="/{{ object.image }}" width="100%" /></a>
+  <div class="bg-light text-center text-secondary overflow-hidden">
+    <div class="py-2">
+      <span class="item_category">{{ object.category.name }}</span>
+      <h2 class="item_name">{{ object.name }}</h2>
+      <span class="item_price">{{ object.price }}JPY</span>
+    </div>
+    <form action="/cart/add/" method="POST" class="p-2">
+      {% csrf_token %}
+      <input type="hidden" name="item_pk" value="{{ object.pk }}" />
+      <div class="form-row align-items-center">
+        <div class="col-7">
+          <input type="number" class="form-control form-control-sm mt-2" name="quantity" value="1" max="{{ object.stock }}" />
+        </div>
+        <div class="col-5">
+          {% if object.stock == 0 %}
+            <button type="submit" class="btn btn-sm btn-outline-warning mt-2 w-100" disabled>Sold Out</button>
+          {% else %}
+            <button type="submit" class="btn btn-sm btn-outline-success mt-2 w-100">Add</button>
+          {% endif %}
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

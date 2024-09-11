@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/cart.css' %}" />
+{% endblock %}
+
+{% block main %}
+  <div class="container-fluid">
+    <div class="row my-5">
+      <div class="col-12 mt-5 cart">
+        <div class="row">
+          <div class="col">
+            <h2 class=" col section_title mb-3">CART</h2>
+          </div>
+          {% if object_list|length != 0 %}
+          <div class="col text-right">
+            <a href="/" class="view-more">Continue Shopping ></a>
+          </div>
+          {% endif %}
+        </div>
+        {% if object_list|length != 0 %}
+          <table class="table table-hover mb-5">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">IMAGE</th>
+                <th scope="col">NAME</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">QUANTITY</th>
+                <th scope="col">TOTAL</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for object in object_list %}
+                <tr>
+                  <td>No.{{ forloop.counter }}</td>
+                  <td>
+                    <a href="/items/{{ object.pk }}/"><img src="/{{ object.image }}" width="100%" /></a>
+                  </td>
+                  <td>
+                    <a href="/items/{{ object.pk }}/" class="text-dark">{{ object.name }}</a>
+                  </td>
+                  <td>{{ object.price }}</td>
+                  <td>{{ object.quantity }}</td>
+                  <td>{{ object.subtotal }}</td>
+                  <td>
+                    <a href="/cart/remove/{{ object.pk }}/" class="my-auto btn btn-danger btn-sm"><i class="fa-regular fa-trash-can"></i></a>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <p class="text-right m-0">Subtotal - {{ total }}JPY</p>
+          <p class="text-right">Total - {{ tax_included_total }}JPY</p>
+
+          <!-- Checkoutボタン -->
+          <form action="/pay/checkout/" method="POST" class="text-right">
+            {% csrf_token %}
+            <button type="submit" class="btn-main">Checkout</button>
+          </form>
+        {% else %}
+          <div class="text-center">
+            <p class="cat_icon">
+              <i class="fa-solid fa-cat"></i>
+            </p>
+            <p class="h5 mb-4">Your shopping cart is empty right now.</p>
+
+            <a href="/" class="btn btn-dark">Continue Shopping</a>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+
+
+    <h2 class="section_title">You May Also Like</h2>
+    <div class="row mb-5">
+      {% for object in ADDTIONAL_ITEMS %}
+      <div class="col-6 col-md-4 col-lg-3 my-3">
+        {% include 'snippets/item_add_box.html' %}
+      </div>
+      {% endfor %}
+    </div>
+
+
+  </div>
+
+{% endblock %}
+
+{% block script %}
+  <script src="{% static 'frontend/js/cart.js' %}"></script>
+{% endblock %}
