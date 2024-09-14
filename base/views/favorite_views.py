@@ -1,4 +1,4 @@
-from django.urls import reverse_lazy
+
 from django.views.generic import View, ListView
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -16,15 +16,6 @@ class FavoriteListView(LoginRequiredMixin,ListView):
     
     def get_queryset(self):
         return self.request.user.favorite_items.all()
-      
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        user_favorites = self.request.user.favorite_items.all()   
-        
-        for item in context['favorites']:
-            item.is_favorite = item in user_favorites
-        
-        return context
     
     
     

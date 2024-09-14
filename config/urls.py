@@ -5,6 +5,7 @@ from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    
     # Account
     path("login/", views.Login.as_view()),
     path("logout/", LogoutView.as_view()),
@@ -23,8 +24,11 @@ urlpatterns = [
     path("cart/add/", views.AddCartView.as_view()),
     path("cart/", views.CartListView.as_view()), 
     # Favorite
-    path('item/<str:pk>/toggle_favorite/', views.ToggleFavoriteView.as_view()),
-    path('favorites/', views.FavoriteListView.as_view()),
+    path("item/<str:pk>/toggle_favorite/", views.ToggleFavoriteView.as_view()),
+    path("favorites/", views.FavoriteListView.as_view()),
+    #About
+    path('about/', views.AboutIndexView.as_view(), name='about_redirect'),
+    path('about-page/', views.AboutPageView, name='about_page'),
     # Items
     path("items/<str:pk>/", views.ItemDetailView.as_view()),
     path("categories/<str:pk>/", views.CategoryListView.as_view()),

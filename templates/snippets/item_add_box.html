@@ -8,7 +8,7 @@
   <div class="bg-light text-center text-secondary overflow-hidden">
     <div class="py-2">
       <span class="item_category">{{ object.category.name }}</span>
-      <h2 class="item_name">{{ object.name }}</h2>
+      <a href="/items/{{ object.pk }}/" class="item_name">{{ object.name }}</a>
       <span class="item_price">{{ object.price }}JPY</span>
     </div>
     <form action="/cart/add/" method="POST" class="p-2">
@@ -32,7 +32,7 @@
         {% else %}
           <span id="favorite-btn-{{ object.pk }}" data-item-id="{{ object.pk }}" class="favorite-btn"><i class="fa-regular fa-heart text-danger"></i></span>
         {% endif %}
-        
+
       </div>
     </form>
   </div>

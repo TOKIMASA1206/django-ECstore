@@ -36,10 +36,13 @@
           <ul class="dropdown-menu">
             {% if user.is_authenticated %}
               <li>
-                <a class="dropdown-item" href="/profile/">Profile</a>
+                <a class="dropdown-item" href="/profile/"><i class="fa-solid fa-circle-user"></i> Profile</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/logout">Logout</a>
+                <a class="dropdown-item" href="/account/"><i class="fa-solid fa-circle-user"></i> Account</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
               </li>
             {% else %}
               <li>
@@ -75,6 +78,9 @@
               {% if user.is_authenticated %}
                 <li>
                   <a class="dropdown-item" href="/profile/"><i class="fa-solid fa-circle-user"></i> Profile</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/account/"><i class="fa-solid fa-circle-user"></i> Account</a>
                 </li>
                 <li>
                   <a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>

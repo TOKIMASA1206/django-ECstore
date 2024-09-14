@@ -13,6 +13,7 @@
       </div>
     </div>
 
+    {% if favorites %}
 
     <div class="row section_item my-5">
       {% for object in favorites  %}
@@ -27,5 +28,17 @@
         {% include 'snippets/pagination.html' %}
       </div>
     </div>
+
+    {% else %}
+
+    <div class="text-center mb-5">
+      <p class="inform_icon">
+        <i class="fa-solid fa-cat"></i>
+      </p>
+      <p class="h5 mb-4">Your favorite items are waiting to be discovered.</p>
+
+      <a href="/" class="btn btn-dark">Continue Shopping</a>
+    </div>
+    {% endif %}
   </div>
 {% endblock %}

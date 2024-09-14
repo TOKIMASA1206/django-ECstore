@@ -42,6 +42,10 @@ section{
   font-size: 28px;
 }
 
+.sub_title{
+  font-size: 22px;
+}
+
 .section_item{
   max-width: 1200px;
   margin: 0 auto;
@@ -54,6 +58,10 @@ section{
 
 .inform_icon{
   font-size: 200px;
+}
+
+.text-red{
+  color: var(--colorRed);
 }
 
 
