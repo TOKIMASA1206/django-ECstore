@@ -23,7 +23,7 @@
       </div>
 
       <div class="d-none d-md-flex">
-        <a href="/orders/" class="header_icon"><i class="fa-solid fa-heart"></i></a>
+        <a href="/favorites/" class="header_icon"><i class="fa-solid fa-heart"></i></a>
         <a href="/cart/" class="header_icon position-relative">
           <i class="fa-brands fa-opencart"></i>
           {% if request.session.cart and request.session.cart.items|length != 0 %}
@@ -74,10 +74,10 @@
             <ul class="dropdown-menu">
               {% if user.is_authenticated %}
                 <li>
-                  <a class="dropdown-item" href="/profile/">Profile</a>
+                  <a class="dropdown-item" href="/profile/"><i class="fa-solid fa-circle-user"></i> Profile</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/logout">Logout</a>
+                  <a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                 </li>
               {% else %}
                 <li>
@@ -89,7 +89,7 @@
               {% endif %}
             </ul>
           </div>
-          <a href="/orders/" class="header_icon"><i class="fa-solid fa-heart"></i> <span>Favorite</span></a>
+          <a href="/favorites/" class="header_icon"><i class="fa-solid fa-heart"></i> <span>Favorite</span></a>
           <a href="/cart/" class="header_icon">
             <i class="fa-brands fa-opencart"></i>
             <span>Cart</span>

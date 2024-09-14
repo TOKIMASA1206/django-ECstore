@@ -2,15 +2,18 @@
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/item_box.css' %}" />
 {% endblock %}
-<a href="/items/{{object.pk}}/">
-  <div class="border">
-    <img src="/{{object.image}}" width="100%">
-    <div class="bg-light text-center text-secondary overflow-hidden">
-      <div class="my-2 py-2">
-        <span class="item_category">{{object.category.name}}</span>
-        <h2 class="item_name">{{object.name}}</h2>
-        <span class="item_price">{{object.price}}JPY</span>
-      </div>
+<div class="border">
+  <a href="/items/{{ object.pk }}/"><img src="/{{ object.image }}" width="100%" /></a>
+  <div class="bg-light text-center text-secondary overflow-hidden">
+    <div class="my-2 py-2">
+      <span class="item_category">{{ object.category.name }}</span>
+      <h2 class="item_name">{{ object.name }}</h2>
+      <span class="item_price">{{ object.price }}JPY</span>
+      {% if object in user.favorite_items.all %}
+        <span id="favorite-btn-{{ object.pk }}" data-item-id="{{ object.pk }}" class="favorite-btn"><i class="fa-solid fa-heart text-danger"></i></span>
+      {% else %}
+        <span id="favorite-btn-{{ object.pk }}" data-item-id="{{ object.pk }}" class="favorite-btn"><i class="fa-regular fa-heart text-danger"></i></span>
+      {% endif %}
     </div>
   </div>
-</a>
+</div>

@@ -21,7 +21,10 @@ urlpatterns = [
     # Cart
     path("cart/remove/<str:pk>/", views.remove_from_cart),
     path("cart/add/", views.AddCartView.as_view()),
-    path("cart/", views.CartListView.as_view()),  # カートページ
+    path("cart/", views.CartListView.as_view()), 
+    # Favorite
+    path('item/<str:pk>/toggle_favorite/', views.ToggleFavoriteView.as_view()),
+    path('favorites/', views.FavoriteListView.as_view()),
     # Items
     path("items/<str:pk>/", views.ItemDetailView.as_view()),
     path("categories/<str:pk>/", views.CategoryListView.as_view()),

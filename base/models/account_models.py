@@ -2,7 +2,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
-from base.models import create_id
+from base.models import create_id, Item
  
  
 class UserManager(BaseUserManager):
@@ -36,6 +36,11 @@ class User(AbstractBaseUser):
     email = models.EmailField(max_length=255, unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    
+    
+    favorite_items = models.ManyToManyField(Item, blank=True, related_name='favorited_by')
+    
+    
     objects = UserManager()
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'

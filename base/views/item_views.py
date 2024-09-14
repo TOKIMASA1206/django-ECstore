@@ -26,7 +26,6 @@ class CategoryListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = f"{self.category.name}"
-        context["categories"] = Category.objects.all()
         context['category_slug'] = self.category.slug
         return context
     
@@ -36,10 +35,6 @@ class AllItemListView(ListView):
     template_name = "pages/all_item.html"
     paginate_by = 8
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["categories"] = Category.objects.all()
-        return context
 
 
 class TagListView(ListView):

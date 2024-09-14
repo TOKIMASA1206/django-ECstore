@@ -25,6 +25,14 @@
             <button type="submit" class="btn btn-sm btn-outline-success mt-2 w-100">Add</button>
           {% endif %}
         </div>
+
+        
+        {% if object in user.favorite_items.all %}
+          <span id="favorite-btn-{{ object.pk }}" data-item-id="{{ object.pk }}" class="favorite-btn"><i class="fa-solid fa-heart text-danger"></i></span>
+        {% else %}
+          <span id="favorite-btn-{{ object.pk }}" data-item-id="{{ object.pk }}" class="favorite-btn"><i class="fa-regular fa-heart text-danger"></i></span>
+        {% endif %}
+        
       </div>
     </form>
   </div>
