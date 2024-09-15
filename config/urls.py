@@ -12,6 +12,10 @@ urlpatterns = [
     path("signup/", views.SignUpView.as_view()),
     path("account/", views.AccountUpdateView.as_view()),
     path("profile/", views.ProfileUpdateView.as_view()),
+    #Contact
+    path('contact/', views.ContactFormView.as_view(),name='contact'),
+    path('contact/result/', views.ContactResultView.as_view(),name='contact_result'),
+    path('contact/failure/', views.ContactFailureView.as_view(), name='contact_failure'),
     # Order
     path("orders/<str:pk>/", views.OrderDetailView.as_view()),
     path("orders/", views.OrderIndexView.as_view()),
@@ -27,8 +31,7 @@ urlpatterns = [
     path("item/<str:pk>/toggle_favorite/", views.ToggleFavoriteView.as_view()),
     path("favorites/", views.FavoriteListView.as_view()),
     #About
-    path('about/', views.AboutIndexView.as_view(), name='about_redirect'),
-    path('about-page/', views.AboutPageView, name='about_page'),
+    path('about/', views.AboutIndexView.as_view()),
     # Items
     path("items/<str:pk>/", views.ItemDetailView.as_view()),
     path("categories/<str:pk>/", views.CategoryListView.as_view()),
