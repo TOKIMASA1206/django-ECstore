@@ -6,14 +6,34 @@
 {% endblock %}
 
 {% block main %}
-  <div class="container">
+  <div class="container-fluid">
     <div class="row my-5">
       <div class="col-12 col-md-7 mt-5">
-        <div class="card overflow-hidden mb-5">
-          <img src="/{{ object.image }}" width="100%" />
-        </div>
+        <!-- Slider container for both Swipers -->
+        <div class="swiper-container">
+          <!-- Thumbnail Swiper -->
+          <div class="swiper mySwiper2 card">
+            <div class="swiper-wrapper">
+              {% for image in object.images.all %}
+                <img src="{{ image.image.url }}" class="swiper-slide" width="100%"/>
+              {% endfor %}
+            </div>
+          </div>
 
-        <div class="mb-4">
+          <!-- Main Swiper -->
+          <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+              {% for image in object.images.all %}
+                <img src="{{ image.image.url }}" class="swiper-slide" width="100%"/>
+              {% endfor %}
+            </div>
+          </div>
+        </div>          
+
+
+
+                
+        <div class="my-4">
           <h2 class="section_title">Description</h2>
           <hr />
           <p class="item_description">{{ object.description }}</p>
@@ -70,4 +90,10 @@
 
 
   </div>
+{% endblock %}
+
+
+
+{% block script %}
+  <script src="{% static 'frontend/js/item.js' %}"></script>
 {% endblock %}

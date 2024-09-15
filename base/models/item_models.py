@@ -9,10 +9,11 @@ def create_id():
     return get_random_string(22)
 
 
-# 画像のURLを保存
+# # 画像のURLを保存
 def upload_image_to(instance, filename):
-    item_id = instance.id
-    return os.path.join("static", "items", item_id, filename)
+
+    item_id = str(instance.item.id)
+    return os.path.join('items', item_id, filename) 
 
 
 # Tagのクラス
@@ -32,6 +33,19 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+# Imageのクラス
+class Image(models.Model):
+    image = models.ImageField(default="", blank=True, upload_to=upload_image_to)
+    item = models.ForeignKey(
+    'Item', 
+    on_delete=models.CASCADE, 
+    related_name='images', 
+    null=True, 
+    blank=True
+)
+    
+    def __str__(self):
+        return self.image.name
 
 class Item(models.Model):
     id = models.CharField(
@@ -45,9 +59,7 @@ class Item(models.Model):
     is_published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    image = models.ImageField(default="", blank=True, upload_to=upload_image_to)
-
-    # ForeignKeyでつなげる
+    
     category = models.ForeignKey(
         "Category", on_delete=models.SET_NULL, null=True, blank=True
     )

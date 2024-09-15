@@ -120,6 +120,9 @@
         {% for category in CATEGORY_ITEMS %}
           <li><a href="/categories/{{ category.slug }}/" class="drawer__menu">{{ category.name }}</a></li>
         {% endfor %}
+        {% for tag in TAG_ITEMS %}
+          <li><a href="/tags/{{ tag.slug }}/" class="drawer__menu">{{ tag.name }}</a></li>
+        {% endfor %}
       </ul>
     </div>
     

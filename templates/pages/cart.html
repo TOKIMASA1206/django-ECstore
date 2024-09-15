@@ -11,12 +11,12 @@
       <div class="col-12 mt-5 cart">
         <div class="row">
           <div class="col">
-            <h2 class=" col section_title mb-3">CART</h2>
+            <h2 class="col section_title mb-3">CART</h2>
           </div>
           {% if object_list|length != 0 %}
-          <div class="col text-right">
-            <a href="/" class="view-more">Continue Shopping ></a>
-          </div>
+            <div class="col text-right">
+              <a href="/" class="view-more">Continue Shopping ></a>
+            </div>
           {% endif %}
         </div>
         {% if object_list|length != 0 %}
@@ -37,7 +37,11 @@
                 <tr>
                   <td>No.{{ forloop.counter }}</td>
                   <td>
-                    <a href="/items/{{ object.pk }}/"><img src="/{{ object.image }}" width="100%" /></a>
+                    <a href="/items/{{ object.pk }}/">
+                      {% for image in object.images.all|slice:':1' %}
+                        <img src="{{ image.image.url }}" width="100%"/>
+                      {% endfor %}
+                    </a>
                   </td>
                   <td>
                     <a href="/items/{{ object.pk }}/" class="text-dark">{{ object.name }}</a>
@@ -73,19 +77,15 @@
       </div>
     </div>
 
-
     <h2 class="section_title">You May Also Like</h2>
     <div class="row mb-5">
       {% for object in ADDTIONAL_ITEMS %}
-      <div class="col-6 col-md-4 col-lg-3 my-3">
-        {% include 'snippets/item_add_box.html' %}
-      </div>
+        <div class="col-6 col-md-4 col-lg-3 my-3">
+          {% include 'snippets/item_add_box.html' %}
+        </div>
       {% endfor %}
     </div>
-
-
   </div>
-
 {% endblock %}
 
 {% block script %}

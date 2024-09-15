@@ -4,7 +4,11 @@
 {% endblock %}
 
 <div class="border">
-  <a href="/items/{{ object.pk }}/"><img src="/{{ object.image }}" width="100%" /></a>
+  <a href="/items/{{ object.pk }}/">
+    {% for image in object.images.all|slice:":1" %}
+     <img src="{{ image.image.url }}" width="100%" class="mb-3" />
+    {% endfor %} 
+  </a>
   <div class="bg-light text-center text-secondary overflow-hidden">
     <div class="py-2">
       <span class="item_category">{{ object.category.name }}</span>

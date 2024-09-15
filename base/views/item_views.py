@@ -40,7 +40,7 @@ class AllItemListView(ListView):
 class TagListView(ListView):
     model = Item
     template_name = "pages/list.html"
-    paginate_by = 2
+    paginate_by = 8
 
     def get_queryset(self):
         self.tag = Tag.objects.get(slug=self.kwargs["pk"])
@@ -48,5 +48,7 @@ class TagListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = f"Tag #{self.tag.name}"
+        context["title"] = f"#{self.tag.name}"
+        context['tag_slug'] = self.tag.slug
+
         return context

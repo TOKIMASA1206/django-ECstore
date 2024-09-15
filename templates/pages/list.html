@@ -21,6 +21,12 @@
         {% if category.slug == category_slug %}btn-blue{% else %}btn-blue-outline{% endif %}
         " >{{ category.name }}</a>
       {% endfor %}
+
+      {% for tag in TAG_ITEMS %}
+        <a href="/tags/{{ tag.slug }}/" class="
+        {% if tag.slug == tag_slug %}btn-blue{% else %}btn-blue-outline{% endif %}
+        " >{{ tag.name }}</a>
+      {% endfor %}
     </div>
 
     <div class="row section_item">
