@@ -60,7 +60,7 @@
           <p class="text-right">Total - {{ tax_included_total }}JPY</p>
 
           <!-- Checkoutボタン -->
-          <form action="/pay/checkout/" method="POST" class="text-right">
+          <form action="{% url 'pay_checkout' %}" method="POST" class="text-right">
             {% csrf_token %}
             <button type="submit" class="btn-main">Checkout</button>
           </form>

@@ -8,7 +8,7 @@
   <div class="footer_item">
     <div class="container">
       <div class="footer_menu">
-        <a href="/contact/" class="menu_item">Contact</a>
+        <a href="{% url 'contact' %}" class="menu_item">Contact</a>
         <a href="" class="menu_item">Legal Notice</a>
         <a href="" class="menu_item">Privacy Police</a>
         <a href="" class="menu_item">Refond Policy</a>
@@ -18,7 +18,7 @@
   </div>
   <div class="row text-center mx-auto align-items-center ">
     <div class="col-auto footer_logo ">
-      <a href="">
+      <a href="/">
         {% load static %}
         <img src="{% static 'images/logo.png' %}" />
         <span>{{TITLE}}</span>

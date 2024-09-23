@@ -7,6 +7,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core import serializers
 import json
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import transaction
  
  
 stripe.api_key = settings.STRIPE_API_SECRET_KEY
@@ -90,6 +92,61 @@ def check_profile_filled(profile):
  
  
 class PayWithStripe(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        if not check_profile_filled(request.user.profile):
+            messages.error(self.request, '配送のためプロフィールを埋めてください。')
+            return redirect('/profile/')
+
+        cart = request.session.get('cart', None)
+        if cart is None or len(cart) == 0:
+            messages.error(self.request, 'カートが空です。')
+            return redirect('/')
+
+        items = [] 
+        line_items = []
+        with transaction.atomic():
+            for item_pk, quantity in cart['items'].items():
+                try:
+                    item = Item.objects.get(pk=item_pk)
+                except ObjectDoesNotExist:
+                    messages.error(self.request, f'アイテム {item_pk} が見つかりません。')
+                    return redirect('/')
+
+                line_item = create_line_item(item.price, item.name, quantity)
+                line_items.append(line_item)
+
+                item_image = item.images.first().image.url if item.images.exists() else None
+                items.append({
+                    "pk": item.pk,
+                    "name": item.name,
+                    "image": item_image,
+                    "price": item.price,
+                    "quantity": quantity,
+                })
+
+                item.stock -= quantity
+                item.sold_count += quantity
+                item.save()
+
+            order = Order.objects.create(
+                user=request.user,
+                uid=request.user.pk,
+                items=json.dumps(items),
+                shipping=serializers.serialize("json", [request.user.profile]),
+                amount=cart['total'],
+                tax_included=cart['tax_included_total']
+            )
+
+            checkout_session = stripe.checkout.Session.create(
+                customer_email=request.user.email,
+                payment_method_types=['card'],
+                line_items=line_items,
+                mode='payment',
+                success_url=f'{settings.MY_URL}/pay/success/?order_id={order.pk}',
+                cancel_url=f'{settings.MY_URL}/pay/cancel/?order_id={order.pk}',
+            )
+
+        return redirect(checkout_session.url)
  
     def post(self, request, *args, **kwargs):
         if not check_profile_filled(request.user.profile):
@@ -108,12 +165,13 @@ class PayWithStripe(LoginRequiredMixin, View):
             line_item = create_line_item(
                 item.price, item.name, quantity)
             line_items.append(line_item)
- 
+            
+            item_image = item.images.first().image.url if item.images.exists() else None
 
             items.append({
                 "pk": item.pk,
                 "name": item.name,
-                "image": str(item.image),
+                "image": item_image,
                 "price": item.price,
                 "quantity": quantity,
             })

@@ -5,28 +5,46 @@
 
   <section>
     <div class="container-fluid">
-
-
       <h1 class="section_title">POPULAR ITEMS</h1>
       <div class="row section_item my-4">
-        {% for object in POPULAR_ITEMS %}
-          {% if forloop.counter < 5 %}
-            <div class="col-6 col-md-4 col-lg-3 my-3 position-relative">
-              <button type="button" class="btn btn-danger rounded-0 position-absolute">{{ forloop.counter }}</button>
-              {% include 'snippets/item_box.html' %}
-            </div>
-          {% endif %}
-        {% endfor %}
+        {% if POPULAR_ITEMS %}
+          {% for object in POPULAR_ITEMS %}
+            {% if forloop.counter < 5 %}
+              <div class="col-6 col-md-4 col-lg-3 my-3 position-relative">
+                <button type="button" class="btn-main rounded-0 position-absolute">{{ forloop.counter }}</button>
+                {% include 'snippets/item_box.html' %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        {% else %}
+          <p class="inform_icon">
+            <i class="fa-solid fa-shirt"></i>
+          </p>
+          <p>No popular items available</p>
+        {% endif %}
       </div>
 
-
-      <h1 class="section_title">NEW ARRIVALS</h1>
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <h1 class="section_title">NEW ARRIVALS</h1>
+        </div>
+        <div class="col text-right">
+          <a href="{% url 'all_items' %}" class="text-end text-dark ">View All Items ></a>
+        </div>
+      </div>
       <div class="row section_item my-4">
-        {% for object in object_list|slice:":8" %}
-          <div class="col-6 col-md-4 col-lg-3 my-2">
-            {% include 'snippets/item_box.html' %}
-          </div>
-        {% endfor %}
+        {% if object_list %}
+          {% for object in object_list|slice:':8' %}
+            <div class="col-6 col-md-4 col-lg-3 my-2">
+              {% include 'snippets/item_box.html' %}
+            </div>
+          {% endfor %}
+        {% else %}
+          <p class="inform_icon">
+            <i class="fa-solid fa-shirt"></i>
+          </p>
+          <p>No new arrivals available</p>
+        {% endif %}
       </div>
     </div>
   </section>

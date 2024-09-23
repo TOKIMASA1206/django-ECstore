@@ -1,6 +1,3 @@
-.item_name{
-  font-size: 24px;
-}
 
 .item_stock{
   font-size: 12px;
@@ -77,11 +74,11 @@
 
   .swiper-container {
     display: flex;
-    flex-direction: column; /* 小さい画面では縦並び */
+    flex-direction: column;
   }
 
   .mySwiper2,
   .mySwiper {
-    width: 94%; /* スライダーを横幅いっぱいにする */
+    width: 94%;
   }
 }

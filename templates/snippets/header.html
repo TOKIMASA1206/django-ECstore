@@ -14,9 +14,9 @@
         </a>
       </div>
       <div id="search_bar" class="d-none d-md-flex">
-        <form class="form-inline my-2 d-flex">
+        <form class="form-inline my-2 d-flex" method="get" action="{% url 'item_search' %}">
           <div>
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Item" aria-label="Search" />
+            <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Item" />
           </div>
           <button class="btn-red-outline" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
         </form>
@@ -36,20 +36,20 @@
           <ul class="dropdown-menu">
             {% if user.is_authenticated %}
               <li>
-                <a class="dropdown-item" href="/profile/"><i class="fa-solid fa-circle-user"></i> Profile</a>
+                <a class="dropdown-item" href="{% url 'profile_update' %}"><i class="fa-solid fa-circle-user"></i> Profile</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/account/"><i class="fa-solid fa-circle-user"></i> Account</a>
+                <a class="dropdown-item" href="{% url 'account_update' %}"><i class="fa-solid fa-circle-user"></i> Account</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
               </li>
             {% else %}
               <li>
-                <a class="dropdown-item" href="/signup/">SignUp</a>
+                <a class="dropdown-item" href="{% url 'signup' %}">SignUp</a>
               </li>
               <li>
-                <a class="dropdown-item" href="/login/">Login</a>
+                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
               </li>
             {% endif %}
           </ul>
@@ -64,39 +64,41 @@
       <div id="navbarNav" class="d-md-none">
         <div class="nav_column">
           <div id="search_bar" class="px-3">
-            <form class="form-inline my-2 d-flex">
+            <form class="form-inline my-2 d-flex" method="get" action="{% url 'item_search' %}">
               <div>
-                <input class="form-control mr-sm-2" type="search" placeholder="Search Item" aria-label="Search" />
+                <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Item" />
               </div>
               <button class="btn-red-outline" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
           </div>
           <div class="dropdown header_icon">
-            <a class="dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-circle-user"></i>
-               Profile</a>
+            <a class="dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-circle-user"></i>
+              Profile
+            </a>
             <ul class="dropdown-menu">
               {% if user.is_authenticated %}
                 <li>
-                  <a class="dropdown-item" href="/profile/"><i class="fa-solid fa-circle-user"></i> Profile</a>
+                  <a class="dropdown-item" href="{% url 'profile_update' %}"><i class="fa-solid fa-circle-user"></i> Profile</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/account/"><i class="fa-solid fa-circle-user"></i> Account</a>
+                  <a class="dropdown-item" href="{% url 'account_update' %}"><i class="fa-solid fa-circle-user"></i> Account</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                  <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
                 </li>
               {% else %}
                 <li>
-                  <a class="dropdown-item" href="/signup/">SignUp</a>
+                  <a class="dropdown-item" href="{% url 'signup' %}">SignUp</a>
                 </li>
                 <li>
-                  <a class="dropdown-item" href="/login/">Login</a>
+                  <a class="dropdown-item" href="{% url 'login' %}">Login</a>
                 </li>
               {% endif %}
             </ul>
           </div>
-          <a href="/favorites/" class="header_icon"><i class="fa-solid fa-heart"></i> <span>Favorite</span></a>
-          <a href="/cart/" class="header_icon">
+          <a href="{% url 'favorite_list' %}" class="header_icon"><i class="fa-solid fa-heart"></i> <span>Favorite</span></a>
+          <a href="{% url 'cart_list' %}" class="header_icon">
             <i class="fa-brands fa-opencart"></i>
             <span>Cart</span>
             {% if request.session.cart and request.session.cart.items|length != 0 %}
@@ -116,20 +118,25 @@
     <div class="dropdown d-inline" id="js-drawer">
       <a href="#" class="menu_item">CATEGORY</a>
       <ul class="drawer p-0" id="js-drawer-list">
-        <li><a href="/all/items" class="drawer__menu">All</a></li>
+        <li>
+          <a href="{% url 'all_items' %}" class="drawer__menu">All</a>
+        </li>
         {% for category in CATEGORY_ITEMS %}
-          <li><a href="/categories/{{ category.slug }}/" class="drawer__menu">{{ category.name }}</a></li>
+          <li>
+            <a href="/categories/{{ category.slug }}/" class="drawer__menu">{{ category.name }}</a>
+          </li>
         {% endfor %}
         {% for tag in TAG_ITEMS %}
-          <li><a href="/tags/{{ tag.slug }}/" class="drawer__menu">{{ tag.name }}</a></li>
+          <li>
+            <a href="/tags/{{ tag.slug }}/" class="drawer__menu">{{ tag.name }}</a>
+          </li>
         {% endfor %}
       </ul>
     </div>
-    
 
     <a href="/blog/" class="menu_item">BLOG</a>
-    <a href="/about/" class="menu_item">ABOUT</a>
-    <a href="/orders/" class="menu_item">ORDER</a>
+    <a href="{% url 'about' %}" class="menu_item">ABOUT</a>
+    <a href="{% url 'order_index' %}" class="menu_item">ORDER</a>
   </div>
 {% endblock %}
 

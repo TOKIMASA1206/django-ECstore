@@ -14,7 +14,7 @@
     </div>
 
     <div class="categories_btn text-center mb-5">
-      <a href="/all/items/" class="btn-blue-outline">All</a>
+      <a href="{% url 'all_items' %}" class="btn-blue-outline">All</a>
 
       {% for category in CATEGORY_ITEMS %}
         <a href="/categories/{{ category.slug }}/" class="

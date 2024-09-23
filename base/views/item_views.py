@@ -1,12 +1,23 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from base.models import Item, Category, Tag
+from django.contrib.auth.mixins import LoginRequiredMixin
 
+class ItemSearchView(LoginRequiredMixin,ListView):
+    model = Item 
+    template_name = 'pages/search_results.html'
 
+    def get_queryset(self):
+        query = self.request.GET.get('q') 
+        if query:
+            return Item.objects.search(query=query) 
+        return Item.objects.filter(is_published=True)
+    
+    
 class IndexListView(ListView):
     model = Item
     template_name = "pages/index.html"
-    queryset = Item.objects.filter(is_published=True)
+    queryset = Item.objects.filter(is_published=True).order_by('-created_at')
 
 
 class ItemDetailView(DetailView):

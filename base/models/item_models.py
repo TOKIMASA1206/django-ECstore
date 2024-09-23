@@ -2,6 +2,28 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.crypto import get_random_string
 import os
+from django.db.models import Q
+
+#Search
+class ItemModelQuerySet(models.QuerySet):
+    def search(self, query=None):
+        qs = self
+        qs = qs.filter(is_published=True)
+        if query is not None:
+            or_lookup = (
+                Q(name__icontains=query)|
+                Q(description__icontains=query)
+            )
+            qs = qs.filter(or_lookup).distinct()
+        return qs.order_by("-created_at")    
+
+
+class ItemModelManager(models.Manager):
+    def get_queryset(self):
+        return ItemModelQuerySet(self.model, using=self.db)
+    
+    def search(self, query=None):
+        return self.get_queryset().search(query=query)
 
 
 # IDをランダムに決定
@@ -14,6 +36,8 @@ def upload_image_to(instance, filename):
 
     item_id = str(instance.item.id)
     return os.path.join('items', item_id, filename) 
+
+
 
 
 # Tagのクラス
@@ -59,6 +83,8 @@ class Item(models.Model):
     is_published = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    
+    objects = ItemModelManager()
     
     category = models.ForeignKey(
         "Category", on_delete=models.SET_NULL, null=True, blank=True

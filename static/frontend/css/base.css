@@ -1,17 +1,21 @@
 body{
-  font-family: "Palanquin Dark", sans-serif !important;
-  font-weight: 400;
+  font-family: "Roboto Condensed", sans-serif !important;
+  font-weight: 600;
   font-style: normal;
   overflow-x: hidden;
 }
 
 a{
   text-decoration: none !important;
+  font-weight: 600 !important;
 }
 
 ul,
 li{
   list-style: none;
+}
+p{
+  font-weight: 500;
 }
 
 

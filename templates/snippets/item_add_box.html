@@ -15,7 +15,7 @@
       <a href="/items/{{ object.pk }}/" class="item_name">{{ object.name }}</a>
       <span class="item_price">{{ object.price }}JPY</span>
     </div>
-    <form action="/cart/add/" method="POST" class="p-2">
+    <form action="{% url 'add_to_cart' %}" method="POST" class="p-2">
       {% csrf_token %}
       <input type="hidden" name="item_pk" value="{{ object.pk }}" />
       <div class="form-row align-items-center">
