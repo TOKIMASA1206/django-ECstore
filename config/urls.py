@@ -50,3 +50,4 @@ urlpatterns = [
     path("tags/<str:pk>/", views.TagListView.as_view(), name="tag_detail"),
     path("", views.IndexListView.as_view()),  # トップページ
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
