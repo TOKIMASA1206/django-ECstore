@@ -211,7 +211,7 @@ except ImportError:
 
 # Heroku環境の設定
 if not DEBUG:
-    SECRET_KEY = os.environ['SECRET_KEY']
+    SECRET_KEY = env.str('SECRET_KEY')
     import django_heroku
     django_heroku.settings(locals())
 
