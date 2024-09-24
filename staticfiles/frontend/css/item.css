@@ -1,0 +1,84 @@
+
+.item_stock{
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.item_price{
+  font-size: 20px;
+}
+
+
+.item_quantity input{
+  width: 50px;
+  height: 50px;
+}
+
+
+/* ==========  IMAGE ============ */
+
+.swiper--wrapper img{
+  width: 100%;
+  object-fit: cover;
+}
+
+.mySwiper {
+  box-sizing: border-box;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.mySwiper .swiper-slide {
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  line-height: 80px;
+}
+
+.mySwiper .swiper-slide-thumb-active {
+  opacity: 1;
+}
+
+
+@media (min-width: 768px) {
+  .swiper-container {
+    display: flex;
+    flex-direction: row-reverse; 
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .mySwiper2 {
+    width: 80%; 
+  }
+
+  .mySwiper {
+    width: 15%; 
+    padding: 0;
+  }
+
+  .mySwiper .swiper-wrapper{
+    display: flex;
+    flex-direction: column; 
+  }
+  .mySwiper .swiper-wrapper img{
+    display: block;
+    width: 100% !important;
+    height: auto; 
+  }
+
+
+}
+
+@media (max-width: 767px) {
+
+  .swiper-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mySwiper2,
+  .mySwiper {
+    width: 94%;
+  }
+}

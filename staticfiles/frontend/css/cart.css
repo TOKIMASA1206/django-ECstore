@@ -1,0 +1,26 @@
+.cart table{
+  font-size: 14px;
+  text-align: center;
+}
+.cart table td{
+  vertical-align: middle;
+}
+
+.cart img{
+  max-width: 200px;
+}
+
+.cat_icon{
+  font-size: 200px;
+}
+
+
+@media (max-width: 768px) {
+  .cart table{
+    font-size: 10px;
+    text-align: center;
+  }
+  .cat_icon{
+    font-size: 120px;
+  }
+}

@@ -1,0 +1,22 @@
+.contact_card_1{
+  background-color: #FFD100;
+}
+.contact_card_2{
+  background-color: #B7BAE7;
+}
+
+.contact_card_1 ul{
+  padding-left: 20px; 
+}
+.contact_card_1 li{
+  list-style: circle;
+  text-decoration: underline;
+}
+
+h5{
+  font-size: 18px;
+}
+
+p{
+  font-size: 14px;
+}
