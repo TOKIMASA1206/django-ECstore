@@ -15,6 +15,8 @@ import environ
 import os
 from django.contrib import messages
 from decouple import config
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,10 +25,8 @@ env = environ.Env()
 root = environ.Path(BASE_DIR / 'secrets')
 
 # 本番環境用
-# env.read_env(root('.env.prod'))
+env.read_env(root('.env.prod'))
 
-# 開発環境用
-env.read_env(root('.env.dev'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -99,11 +100,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST'),
-        'PORT': config('DB_PORT'),
+        'NAME': env.str('DB_NAME'),
+        'USER': env.str('DB_USER'),
+        'PASSWORD': env.str('DB_PASSWORD'),
+        'HOST': env.str('DB_HOST'),
+        'PORT': env.str('DB_PORT'),
     }
 }
 
@@ -147,7 +148,7 @@ STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  #追記
+STATIC_ROOT = BASE_DIR / 'staticfiles'   #追記
 
 MEDIA_URL = '/media/'
 
@@ -201,3 +202,18 @@ EMAIL_PORT = 'TLSの使用時のポート'
 EMAIL_USE_TLS = True  # TLSの使用
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')  
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') 
+
+# local_settings.pyのインポート
+try:
+    from .local_settings import *
+except ImportError:
+    pass
+
+# Heroku環境の設定
+if not DEBUG:
+    SECRET_KEY = os.environ['SECRET_KEY']
+    import django_heroku
+    django_heroku.settings(locals())
+
+    db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    DATABASES['default'].update(db_from_env)
