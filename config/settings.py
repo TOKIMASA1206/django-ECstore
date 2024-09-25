@@ -32,7 +32,7 @@ env.read_env(root('.env.prod'))
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY') #編集
+SECRET_KEY =  os.environ.get('SECRET_KEY') #編集
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG')  # 修正
@@ -97,17 +97,23 @@ WSGI_APPLICATION = 'config.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env.str('DB_NAME'),
-        'USER': env.str('DB_USER'),
-        'PASSWORD': env.str('DB_PASSWORD'),
-        'HOST': env.str('DB_HOST'),
-        'PORT': env.str('DB_PORT'),
+if os.environ.get('DATABASE_URL'):
+    # Heroku環境ではDATABASE_URLを使用してPostgreSQLに接続
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
     }
-    # 'default': dj_database_url.config(default='postgres://localhost')
-}
+else:
+    # ローカル環境ではPostgreSQLまたはSQLiteを使用
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME':  os.environ.get('DB_NAME'),
+            'USER':  os.environ.get('DB_USER'),
+            'PASSWORD':  os.environ.get('DB_PASSWORD'),
+            'HOST':  os.environ.get('DB_HOST', 'localhost'),  # デフォルトでlocalhost
+            'PORT':  os.environ.get('DB_PORT', '5432'),       # デフォルトで5432
+        }
+    }
 
 
 
@@ -166,10 +172,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 TAX_RATE = 0.1
 
 # Stripe API Key
-STRIPE_API_SECRET_KEY = env.str('STRIPE_API_SECRET_KEY')
+STRIPE_API_SECRET_KEY =  os.environ.get('STRIPE_API_SECRET_KEY')
  
 # スキーマ＆ドメイン
-MY_URL = env.str('MY_URL')
+MY_URL =  os.environ.get('MY_URL')
 
 #カスタムユーザーモデル
 AUTH_USER_MODEL = 'base.User'
@@ -212,7 +218,7 @@ except ImportError:
 
 # Heroku環境の設定
 if not DEBUG:
-    SECRET_KEY = env.str('SECRET_KEY')
+    SECRET_KEY =  os.environ.get('SECRET_KEY')
     import django_heroku
     django_heroku.settings(locals())
 
