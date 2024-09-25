@@ -16,6 +16,7 @@ import os
 from django.contrib import messages
 from decouple import config
 import dj_database_url
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -49,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'base',
 ]
@@ -151,11 +153,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  #追記
+
+django_heroku.settings(locals())
 
 MEDIA_URL = '/media/'
 
@@ -219,7 +223,6 @@ except ImportError:
 # Heroku環境の設定
 if not DEBUG:
     SECRET_KEY =  os.environ.get('SECRET_KEY')
-    import django_heroku
     django_heroku.settings(locals())
 
     db_from_env = dj_database_url.config(conn_max_age=600, ssl_require=True)
