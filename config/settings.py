@@ -210,8 +210,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'SMTPサーバー'
 EMAIL_PORT = 'TLSの使用時のポート'
 EMAIL_USE_TLS = True  # TLSの使用
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')  
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD') 
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='dummy@example.com')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='password')
+
 
 # local_settings.pyのインポート
 try:
