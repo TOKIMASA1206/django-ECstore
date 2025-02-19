@@ -11,6 +11,7 @@ a{
 }
 table{
   text-align: center;
+  white-space: nowrap;
 }
 th{
   font-size: 16px;
@@ -27,7 +28,11 @@ li{
 p{
   font-weight: 500;
 }
-
+img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
 
 
 :root {
@@ -43,4 +48,22 @@ p{
 
 .bg-purple{
   background-color: var(--colorPurple);
+}
+
+
+@media (max-width: 768px) {
+  
+  img{
+    width: 60px;
+    height: 60px;
+  }
+  th {
+    font-size: 14px;
+  }
+  td {
+    font-size: 12px;
+  }
+  a{
+    font-size: 14px;
+  }
 }
