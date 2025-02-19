@@ -1,0 +1,77 @@
+{% extends 'admin_base.html' %}
+
+{% block main %}
+  <table class="table table-hover align-middle bg-white border text-secondary table-user">
+    <thead class="small text-light">
+      <tr class="bg-purple">
+        <th></th>
+        <th>NAME</th>
+        <th>EMAIL</th>
+        <th>CREATED AT</th>
+        <th>STATUS</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="align-items-center">
+      {% for user in users %}
+      <tr>
+        <td class="align-middle">
+          {% if user.profile.avatar.url %}
+          <img src="{{ user.profile.avatar.url }}" alt="" class="profile_icon_avatar" style="width:58px; height:58px;">
+          {% else %}
+          <i class="fa-solid fa-circle-user icon-sm" style="font-size:58px;"></i>
+          {% endif %}
+        </td>
+        <td class="align-middle fw-bold">{{ user.username }}</td>
+        <td class="align-middle">{{ user.email }}</td>
+        <td class="align-middle">{{ user.date_joined|date:"Y-m-d H:i" }}</td>
+        <td class="align-middle">
+          {% if user.is_active %}
+          <i class="fa-solid fa-circle text-success"></i>&nbsp;Active
+          {% else %}
+          <i class="fa-regular fa-circle"></i>&nbsp;Inactive
+          {% endif %}
+        </td>
+        <td class="align-middle">
+          <!-- アクションボタンやメニューを追加 -->
+        </td>
+      </tr>
+      {% empty %}
+      <tr>
+        <td colspan="6">No User</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- ページネーション -->
+  <div class="d-flex justify-content-center">
+    {% if is_paginated %}
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        {% endif %}
+        {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
+        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+        {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+{% endblock %}

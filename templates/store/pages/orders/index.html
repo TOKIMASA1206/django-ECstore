@@ -1,0 +1,86 @@
+<!-- templates/admin/orders.html -->
+{% extends 'admin_base.html' %}
+
+{% block main %}
+  <table class="table table-hover align-middle bg-white border text-secondary table-order w-100">
+    <thead class="small text-light">
+      <tr class="bg-purple">
+        <th>Order ID</th>
+        <th>User</th>
+        <th>Confirmed</th>
+        <th>Amount</th>
+        <th>Tax Included</th>
+        <th>Shipped At</th>
+        <th>Canceled At</th>
+        <th>Created At</th>
+      </tr>
+    </thead>
+    <tbody class="align-items-center">
+      {% for order in orders %}
+        <tr>
+          <td class="align-middle">{{ order.id }}</td>
+          <td class="align-middle">{{ order.user.username }}</td>
+          <td class="align-middle">
+            {% if order.is_confirmed %}
+              <i class="fa-solid fa-circle text-success"></i> Confirmed
+            {% else %}
+              <i class="fa-regular fa-circle"></i> Not Confirmed
+            {% endif %}
+          </td>
+          <td class="align-middle">{{ order.amount }}</td>
+          <td class="align-middle">{{ order.tax_included }}</td>
+          <td class="align-middle">
+            {% if order.shipped_at %}
+              {{ order.shipped_at|date:'Y-m-d H:i' }}
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          <td class="align-middle">
+            {% if order.canceled_at %}
+              {{ order.canceled_at|date:'Y-m-d H:i' }}
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          <td class="align-middle">{{ order.created_at|date:'Y-m-d H:i' }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="10">No orders found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center">
+    {% if is_paginated %}
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+            </li>
+          {% endif %}
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <li class="page-item active">
+                <span class="page-link">{{ num }}</span>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+{% endblock %}

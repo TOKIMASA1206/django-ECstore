@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.utils.crypto import get_random_string
 import os
 from django.db.models import Q
+from django.utils.text import slugify
 
 #Search
 class ItemModelQuerySet(models.QuerySet):
@@ -42,8 +43,14 @@ def upload_image_to(instance, filename):
 
 # Tagのクラス
 class Tag(models.Model):
-    slug = models.CharField(max_length=32, primary_key=True)
+    slug = models.CharField(max_length=32, primary_key=True, unique=True, blank=True)
     name = models.CharField(max_length=50)
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            # 名前からスラッグを自動生成
+            self.slug = slugify(self.name)
+        super(Tag, self).save(*args, **kwargs) 
 
     def __str__(self):
         return self.name
@@ -51,9 +58,15 @@ class Tag(models.Model):
 
 # Categoryのクラス
 class Category(models.Model):
-    slug = models.CharField(max_length=32, primary_key=True)
+    slug = models.CharField(max_length=32, primary_key=True, unique=True, blank=True)
     name = models.CharField(max_length=50)
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            # 名前からスラッグを自動生成
+            self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs) 
+        
     def __str__(self):
         return self.name
 

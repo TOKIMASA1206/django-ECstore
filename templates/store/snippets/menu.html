@@ -1,0 +1,27 @@
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/store/menu.css' %}" />
+{% endblock %}
+
+
+
+{% url 'store_users' as store_users_url %}
+{% url 'store_items' as store_items_url %}
+{% url 'store_categories' as store_categories_url %}
+{% url 'store_tags' as store_tags_url %}
+{% url 'store_orders' as store_orders_url %}
+{% url 'store_item_add' as store_item_add_url %}
+{% url 'store_category_add' as store_category_add_url %}
+{% url 'store_tag_add' as store_tag_add_url %}
+
+
+
+
+
+<div class="list-group ">
+  <a href="{{ store_users_url }}" class="list-group-item text-decoration-none {% if request.path == store_users_url %}active{% endif %}"><i class="fa-solid fa-users"></i> Users</a>
+  <a href="{{ store_items_url }}" class="list-group-item text-decoration-none {% if request.path == store_items_url %}active{% endif %}"><i class="fa-solid fa-shirt"></i> Items</a>
+  <a href="{{ store_categories_url }}" class="list-group-item text-decoration-none {% if request.path == store_categories_url %}active{% endif %}"><i class="fa-solid fa-tags"></i> Categories</a>
+  <a href="{{ store_tags_url }}" class="list-group-item text-decoration-none {% if request.path == store_tags_url %}active{% endif %}"><i class="fa-solid fa-tags"></i> Tags</a>
+  <a href="{{ store_orders_url }}" class="list-group-item text-decoration-none {% if request.path == store_orders_url %}active{% endif %}"><i class="fa-solid fa-tags"></i> Orders</a>
+</div>

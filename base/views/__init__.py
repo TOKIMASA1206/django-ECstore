@@ -5,4 +5,5 @@ from .account_views import *
 from .order_views import *
 from .favorite_views import *
 from .about_views import *
+from .store_views import *
 

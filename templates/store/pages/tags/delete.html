@@ -1,0 +1,14 @@
+
+{% extends 'admin_base.html' %}
+
+{% block main %}
+  <div class="col-9">
+    <h2 class="text-danger">Delete Tag</h2>
+    <p>Are you sure you want to delete the tag "{{ object.name }}"?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Delete</button>
+      <a href="{% url 'store_tags' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'admin_base.html' %}
+
+{% block main %}
+  <div class="col-9">
+    <h2 class="text-primary">Add Category</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Add Category</button>
+      <a href="{% url 'store_categories' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+{% endblock %}

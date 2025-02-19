@@ -137,3 +137,28 @@ STRIPE_API_SECRET_KEY = os.environ.get('STRIPE_API_SECRET_KEY')
 
 # スキーマ＆ドメイン
 MY_URL = os.environ.get('MY_URL')
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'base.views.store_views': {  # ビューが定義されているモジュール名に合わせて変更
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+    },
+}

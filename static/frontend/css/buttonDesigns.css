@@ -13,6 +13,7 @@
 
 .btn-main:hover {
     background-color: #2539cd;
+    color: var(--colorWhite);
 }
 
 .btn-blue {
@@ -157,4 +158,36 @@
 
 .view-more:hover {
     color: #ed1c14;
+}
+
+
+.btn-red {
+    background-color: #ff3429;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-red:hover {
+    background-color: #da3016;
+}
+
+.btn-yellow {
+    background-color: #efcf19;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-yellow:hover {
+    background-color: #deb01a;
+    color: white;
 }

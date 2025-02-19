@@ -1,0 +1,28 @@
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/header.css' %}" />
+{% endblock %}
+
+{% block main %}
+  <div class="header py-2">
+    <nav class="d-flex flex-md-row justify-content-between align-items-center">
+      <div class="logo">
+        <a href="/">
+          {% load static %}
+          <img src="{% static 'images/logo.png' %}" />
+          <h1 class="logo_title mt-2">{{ TITLE }} Admin</h1>
+        </a>
+      </div>
+      <div id="search_bar" class="d-none d-md-flex">
+        <form class="form-inline my-2 d-flex" method="get" action="{% url 'item_search' %}">
+          <div>
+            <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Item" />
+          </div>
+          <button class="btn-red-outline" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+    </nav>
+  </div>
+
+{% endblock %}
+

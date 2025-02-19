@@ -1,0 +1,66 @@
+
+{% extends 'admin_base.html' %}
+
+{% block main %}
+{% url 'store_category_add' as store_category_add_url %}
+<div class="text-left mb-2">
+  <a href="{{ store_category_add_url }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Category</a>
+</div>
+  <table class="table table-hover align-middle bg-white border text-secondary table-category w-100">
+    <thead class="small text-light">
+      <tr class="bg-purple">
+        <th>Name</th>
+        <th>Slug</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody class="align-items-center">
+      {% for category in categories %}
+        <tr>
+          <td class="align-middle">{{ category.name }}</td>
+          <td class="align-middle">{{ category.slug }}</td>
+          <td class="align-middle">
+            <!-- Edit and delete buttons -->
+            <a href="{% url 'store_category_edit' category.slug %}" class="btn-yellow"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="{% url 'store_category_delete' category.slug %}" class="btn-red"><i class="fa-solid fa-trash-can"></i></a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No categories found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center">
+    {% if is_paginated %}
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+            </li>
+          {% endif %}
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <li class="page-item active">
+                <span class="page-link">{{ num }}</span>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+{% endblock %}
