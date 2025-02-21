@@ -6,7 +6,7 @@
   <div class="text-left mb-2">
     <a href="{{ store_item_add_url }}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Item</a>
   </div>
-  <table class="table table-hover align-middle bg-white border text-secondary table-item w-100">
+  <table class="table table-hover align-middle bg-white border text-secondary table-item w-100 m-0">
     <thead class="small text-light">
       <tr class="bg-purple">
         <th>Image</th>
@@ -23,7 +23,7 @@
         <tr>
           <td class="align-middle">
             {% if item.images.first %}
-              <img src="{{ item.images.first.image.url }}" alt="" style="width:100px; height:100px;" />
+              <img src="{{ item.images.first.image.url }}" alt="" />
             {% else %}
               <i class="fa-solid fa-image" style="font-size:58px;"></i>
             {% endif %}

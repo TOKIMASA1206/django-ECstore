@@ -1,7 +1,7 @@
 {% extends 'admin_base.html' %}
 
 {% block main %}
-  <table class="table table-hover align-middle bg-white border text-secondary table-user">
+  <table class="table table-hover align-middle bg-white border text-secondary table-user w-100 m-0">
     <thead class="small text-light">
       <tr class="bg-purple">
         <th></th>
@@ -17,9 +17,9 @@
       <tr>
         <td class="align-middle">
           {% if user.profile.avatar.url %}
-          <img src="{{ user.profile.avatar.url }}" alt="" class="profile_icon_avatar" style="width:58px; height:58px;">
+          <img src="{{ user.profile.avatar.url }}" alt="" class="profile_icon_avatar"/>
           {% else %}
-          <i class="fa-solid fa-circle-user icon-sm" style="font-size:58px;"></i>
+          <i class="fa-solid fa-circle-user icon-sm" style="font-size:50px;"></i>
           {% endif %}
         </td>
         <td class="align-middle fw-bold">{{ user.username }}</td>

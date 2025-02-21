@@ -124,18 +124,6 @@ class ItemForm(forms.ModelForm):
         }
 
 # Image用のフォームセット
-ImageFormSet = inlineformset_factory(
-    Item,
-    Image,
-    fields=['image'],
-    extra=3,  # 初期表示する画像フォームの数
-    can_delete=True,
-    widgets={
-        'image': forms.ClearableFileInput(attrs={
-            'class': 'form-control-file',
-        }),
-    }
-)
 
 
 class ImageForm(forms.ModelForm):
@@ -153,6 +141,8 @@ ImageFormSet = inlineformset_factory(
     extra=3,
     can_delete=True,
     widgets={
+        'id': forms.HiddenInput(),
+        'item': forms.HiddenInput(),
         'image': forms.ClearableFileInput(attrs={
             'class': 'form-control-file',
         }),

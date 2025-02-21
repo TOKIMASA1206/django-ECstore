@@ -63,44 +63,8 @@ class AdminItemCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
             return redirect(self.get_success_url())
         else:
             return self.render_to_response(self.get_context_data(form=form))      
-      
-      
-# class AdminItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-#     model = Item
-#     form_class = ItemForm
-#     template_name = 'store/pages/items/edit.html'
-#     success_url = reverse_lazy('store_items')
 
-#     def test_func(self):
-#         return self.request.user.is_staff
-
-#     def get_context_data(self, **kwargs):
-#         data = super(AdminItemUpdateView, self).get_context_data(**kwargs)
-#         if self.request.POST:
-#             data['image_formset'] = ImageFormSet(self.request.POST, self.request.FILES, instance=self.object)
-#         else:
-#             data['image_formset'] = ImageFormSet(instance=self.object)
-#         logger.debug(f"Number of image forms: {len(data['image_formset'].forms)}")
-#         return data
-
-#     def form_valid(self, form):
-#         context = self.get_context_data()
-#         image_formset = context['image_formset']
-#         if image_formset.is_valid():
-#             self.object = form.save()
-#             image_formset.instance = self.object
-#             image_formset.save()
-#             logger.debug("Item and Image formsets are valid and have been saved.")
-#             return redirect(self.get_success_url())
-#         else:
-#             # フォームセットが無効な場合、エラーをログに出力
-#             logger.error("Image formset is invalid.")
-#             logger.error(image_formset.errors)
-#             # フォーム自体のエラーも確認
-#             if not form.is_valid():
-#                 logger.error("Item form is invalid.")
-#                 logger.error(form.errors)
-#             return self.render_to_response(self.get_context_data(form=form))
+logger = logging.getLogger(__name__)
 
 class AdminItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Item
@@ -113,7 +77,6 @@ class AdminItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # POST時はリクエストデータから、GET時はインスタンスからフォームセットを作成
         if self.request.method == 'POST':
             context['image_formset'] = ImageFormSet(
                 self.request.POST, self.request.FILES, instance=self.object
@@ -123,33 +86,37 @@ class AdminItemUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return context
 
     def post(self, request, *args, **kwargs):
-        # まず対象のオブジェクトを取得
         self.object = self.get_object()
         form = self.get_form()
         image_formset = ImageFormSet(
             request.POST, request.FILES, instance=self.object
         )
-        # 両方のフォームが有効な場合のみ保存
         if form.is_valid() and image_formset.is_valid():
             return self.form_valid(form, image_formset)
         else:
             return self.form_invalid(form, image_formset)
 
     def form_valid(self, form, image_formset):
-        # Itemの保存
         self.object = form.save()
-        # 画像フォームセットに保存する対象のItemを設定して保存
         image_formset.instance = self.object
         image_formset.save()
         return redirect(self.get_success_url())
 
     def form_invalid(self, form, image_formset):
-        # エラーがある場合は、フォームとフォームセットを再レンダリング
+    # フォームのエラーをログに記録
+        if form.errors:
+            logger.error("Item form is invalid.")
+            logger.error(form.errors)
+        
+        # 画像フォームセットのエラーをログに記録
+        if image_formset.errors:
+            logger.error("Image formset is invalid.")
+            for form_errors in image_formset.errors:
+                logger.error(form_errors)
+        
         context = self.get_context_data(form=form)
         context['image_formset'] = image_formset
         return self.render_to_response(context)
-
-        
         
 class AdminItemDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Item
