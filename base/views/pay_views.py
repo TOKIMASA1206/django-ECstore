@@ -10,6 +10,15 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import transaction
  
+
+import logging
+from django.http import HttpResponseNotFound
+
+logger = logging.getLogger(__name__)
+
+def custom_404(request, exception):
+    logger.error("404 error at path: %s", request.path)
+    return HttpResponseNotFound("404 Not Found: " + request.path)
  
 stripe.api_key = settings.STRIPE_API_SECRET_KEY
  
@@ -50,6 +59,9 @@ class PayCancelView(LoginRequiredMixin, TemplateView):
     template_name = 'pages/cancel.html'
  
     def get(self, request, *args, **kwargs):
+        
+         # デバッグ用ログ出力
+        logger.debug("PayCancelView GET request: path=%s, GET parameters=%s", request.path, request.GET.dict())
         
         orders = Order.objects.filter(user=request.user, is_confirmed=False)
         
@@ -136,14 +148,20 @@ class PayWithStripe(LoginRequiredMixin, View):
                 amount=cart['total'],
                 tax_included=cart['tax_included_total']
             )
+            
+            success_url = f'{settings.MY_URL}/pay/success/?order_id={order.pk}'
+            cancel_url = f'{settings.MY_URL}/pay/cancel/?order_id={order.pk}'
+            
+              # デバッグ用ログ出力
+            logger.debug("Stripe checkout session URLs: success_url=%s, cancel_url=%s", success_url, cancel_url)
 
             checkout_session = stripe.checkout.Session.create(
                 customer_email=request.user.email,
                 payment_method_types=['card'],
                 line_items=line_items,
                 mode='payment',
-                success_url=f'{settings.MY_URL}/pay/success/?order_id={order.pk}',
-                cancel_url=f'{settings.MY_URL}/pay/cancel/?order_id={order.pk}',
+                success_url=success_url,
+                cancel_url=cancel_url,
             )
 
         return redirect(checkout_session.url)
