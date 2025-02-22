@@ -5,9 +5,6 @@ from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
 
-# カスタム404ハンドラーの追加
-from django.conf.urls import handler404
-handler404 = views.custom_404
 
 urlpatterns = [
     path("admin/", admin.site.urls),
