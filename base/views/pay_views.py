@@ -148,56 +148,56 @@ class PayWithStripe(LoginRequiredMixin, View):
 
         return redirect(checkout_session.url)
  
-    def post(self, request, *args, **kwargs):
-        if not check_profile_filled(request.user.profile):
-            messages.error(self.request, '配送のためプロフィールを埋めてください。')
-            return redirect('/profile/')
+    # def post(self, request, *args, **kwargs):
+    #     if not check_profile_filled(request.user.profile):
+    #         messages.error(self.request, '配送のためプロフィールを埋めてください。')
+    #         return redirect('/profile/')
  
-        cart = request.session.get('cart', None)
-        if cart is None or len(cart) == 0:
-            messages.error(self.request, 'カートが空です。')
-            return redirect('/')
+    #     cart = request.session.get('cart', None)
+    #     if cart is None or len(cart) == 0:
+    #         messages.error(self.request, 'カートが空です。')
+    #         return redirect('/')
  
-        items = [] 
-        line_items = []
-        for item_pk, quantity in cart['items'].items():
-            item = Item.objects.get(pk=item_pk)
-            line_item = create_line_item(
-                item.price, item.name, quantity)
-            line_items.append(line_item)
+    #     items = [] 
+    #     line_items = []
+    #     for item_pk, quantity in cart['items'].items():
+    #         item = Item.objects.get(pk=item_pk)
+    #         line_item = create_line_item(
+    #             item.price, item.name, quantity)
+    #         line_items.append(line_item)
             
-            item_image = item.images.first().image.url if item.images.exists() else None
+    #         item_image = item.images.first().image.url if item.images.exists() else None
 
-            items.append({
-                "pk": item.pk,
-                "name": item.name,
-                "image": item_image,
-                "price": item.price,
-                "quantity": quantity,
-            })
+    #         items.append({
+    #             "pk": item.pk,
+    #             "name": item.name,
+    #             "image": item_image,
+    #             "price": item.price,
+    #             "quantity": quantity,
+    #         })
  
-            item.stock -= quantity
-            item.sold_count += quantity
-            item.save()
+    #         item.stock -= quantity
+    #         item.sold_count += quantity
+    #         item.save()
  
-        # 🔴 仮注文を作成（is_confirmed=False）
-        order = Order.objects.create(
-            user=request.user,
-            uid=request.user.pk,
-            items=json.dumps(items),
-            shipping=serializers.serialize("json", [request.user.profile]),
-            amount=cart['total'],
-            tax_included=cart['tax_included_total']
-        )
+    #     # 🔴 仮注文を作成（is_confirmed=False）
+    #     order = Order.objects.create(
+    #         user=request.user,
+    #         uid=request.user.pk,
+    #         items=json.dumps(items),
+    #         shipping=serializers.serialize("json", [request.user.profile]),
+    #         amount=cart['total'],
+    #         tax_included=cart['tax_included_total']
+    #     )
  
-        checkout_session = stripe.checkout.Session.create(
-            customer_email=request.user.email, 
-            payment_method_types=['card'],
-            line_items=line_items,
-            mode='payment',
-            # 🔴 success_urlとcancel_urlには、クエリで注文IDを渡しておく
-            success_url=f'{settings.MY_URL}/pay/success/?order_id={order.pk}',
-            cancel_url=f'{settings.MY_URL}/pay/cancel/?order_id={order.pk}',
-        )
+    #     checkout_session = stripe.checkout.Session.create(
+    #         customer_email=request.user.email, 
+    #         payment_method_types=['card'],
+    #         line_items=line_items,
+    #         mode='payment',
+    #         # 🔴 success_urlとcancel_urlには、クエリで注文IDを渡しておく
+    #         success_url=f'{settings.MY_URL}/pay/success/?order_id={order.pk}',
+    #         cancel_url=f'{settings.MY_URL}/pay/cancel/?order_id={order.pk}',
+    #     )
  
-        return redirect(checkout_session.url)
+    #     return redirect(checkout_session.url)
