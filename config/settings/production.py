@@ -24,7 +24,7 @@ DATABASES = {
     'default': dj_database_url.config(conn_max_age=600, ssl_require=True)
 }
 
-ALLOWED_HOSTS = ['qj-ecsite-dev.onrender.com']
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'qj_ecsite-dev.onrender.com').split(',')
 
 # WhiteNoise の設定
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
