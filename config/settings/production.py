@@ -1,7 +1,7 @@
 # config/settings/production.py
 
 from .base import *
-from decouple import Config, RepositoryEnv
+# from decouple import Config, RepositoryEnv
 import dj_database_url
 
 # # .env.prod ファイルを指定して読み込む
@@ -37,9 +37,9 @@ SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
-# 静的ファイルの設定
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# # 静的ファイルの設定
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [BASE_DIR / 'static']
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # その他の設定があればここに追加
