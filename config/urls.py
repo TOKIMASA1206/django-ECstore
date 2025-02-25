@@ -4,10 +4,13 @@ from base import views
 from django.contrib.auth.views import LogoutView
 from django.conf import settings
 from django.conf.urls.static import static
+from django.urls import path, include
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path('blog/', include('blog.urls')),
+    
     
     #店舗オーナーサイド
     # =======================  USER =========================
@@ -82,6 +85,6 @@ urlpatterns = [
     ),
     path("all/items/", views.AllItemListView.as_view(), name="all_items"),
     path("tags/<str:pk>/", views.TagListView.as_view(), name="tag_detail"),
-    path("", views.IndexListView.as_view()),  # トップページ
+    path("", views.IndexListView.as_view(), name="top_page"),  # トップページ
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

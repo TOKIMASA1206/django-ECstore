@@ -1,0 +1,20 @@
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/item_box.css' %}" />
+{% endblock %}
+<div class="card">
+  <a href="/items/{{ object.pk }}/">
+    {% for image in object.images.all|slice:":1" %}
+      <img src="{{ image.image.url }}" width="100%" />
+    {% endfor %}
+  </a>
+    <div class="bg-light text-center text-secondary overflow-hidden">
+      <div class="my-2 py-2">
+        <div class="blog_post">
+          <h2 class="blog_post_title"><a href="{% url 'blog_store_detail' post.slug %}">{{ post.title }}</a></h2>
+          <p class="blog_post_date">{{ post.created_at }}</p>
+          <p class="blog_post_content">{{ post.content|truncatewords:20 }}</p>
+        </div>   
+      </div>
+    </div>
+</div>

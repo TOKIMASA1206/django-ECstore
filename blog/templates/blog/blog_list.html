@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 my-3">
+        <h1 class="section_title">Blog</h1>
+      </div>
+    </div>
+  {% for post in posts %}
+    <h3><a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a></h3>
+    <p>{{ post.created_at }}</p>
+    <p>{{ post.content|truncatewords:20 }}</p>
+  {% empty %}
+    <div class="text-center mb-5">
+      <p class="inform_icon">
+        <i class="fa-solid fa-cat"></i>
+      </p>
+      <p class="h5 mb-4">No blog posts yet.</p>
+
+      <a href="/" class="btn btn-dark">Continue Shopping</a>
+    </div>
+  {% endfor %}
+  </div>
+</section>
+{% endblock %}

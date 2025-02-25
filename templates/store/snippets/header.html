@@ -3,7 +3,7 @@
   <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/header.css' %}" />
 {% endblock %}
 
-{% block main %}
+{% comment %} {% block main %}
   <div class="header py-2">
     <nav class="d-flex flex-md-row justify-content-between align-items-center">
       <div class="logo">
@@ -24,5 +24,101 @@
     </nav>
   </div>
 
+{% endblock %} {% endcomment %}
+
+{% block main %}
+  <div class="header py-2">
+    <nav class="d-flex flex-md-row justify-content-between align-items-center">
+      <div class="logo">
+        <a href="{% url 'store_users' %}">
+          {% load static %}
+          <img src="{% static 'images/logo.png' %}" />
+          <h1 class="logo_title mt-2">{{ TITLE }} Admin</h1>
+        </a>
+      </div>
+      <div id="search_bar" class="d-none d-md-flex">
+        <form class="form-inline my-2 d-flex" method="get" action="{% url 'item_search' %}">
+          <div>
+            <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Item" />
+          </div>
+          <button class="btn-red-outline" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </form>
+      </div>
+
+      <div class="d-none d-md-flex">
+        <a href="{% url 'store_users' %}" class="header_icon">
+          <i class="fa-solid fa-store"></i>
+        </a>
+        <a href="{% url 'blog_store_list' %}" class="header_icon">
+          <i class="fa-solid fa-blog"></i>
+        </a>
+        <a href="{% url 'favorite_list' %}" class="header_icon">
+          <i class="fa-solid fa-sitemap"></i>
+        </a>
+
+        <div class="dropdown header_icon">
+          <a class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-circle-user"></i></a>
+          <ul class="dropdown-menu">
+            {% if user.is_authenticated %}
+              <li>
+                <a class="dropdown-item" href="{% url 'top_page' %}"><i class="fa-solid fa-house"></i> Site</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+              </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+
+      <!-- ハンバーガーアイコン -->
+      <div class="d-md-none">
+        <i class="fa-solid fa-bars text-white" id="menu-toggle"></i>
+      </div>
+      <!-- ハンバーガーメニュー -->
+      <div id="navbarNav" class="d-md-none">
+        <div class="nav_column">
+          <div id="search_bar" class="px-3">
+            <form class="form-inline my-2 d-flex" method="get" action="{% url 'item_search' %}">
+              <div>
+                <input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Item" />
+              </div>
+              <button class="btn-red-outline" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+          </div>
+          <div class="dropdown header_icon">
+            <a class="dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="fa-solid fa-circle-user"></i>
+              Profile
+            </a>
+            <ul class="dropdown-menu">
+              {% if user.is_authenticated %}
+                <li>
+                  <a class="dropdown-item" href="{% url 'top_page' %}"><i class="fa-solid fa-house"></i> Site</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                </li>
+              {% endif %}
+            </ul>
+          </div>
+          <a href="{% url 'favorite_list' %}" class="header_icon">
+            <i class="fa-solid fa-sitemap"></i> <span>About</span>
+          </a>
+          <a href="{% url 'blog_store_list' %}" class="header_icon">
+            <i class="fa-solid fa-blog"></i> <span>Blog</span>
+          </a>
+          <a href="{% url 'store_users' %}" class="header_icon">
+            <i class="fa-solid fa-store"></i> <span>Store</span>
+          </a>
+        </div>
+      </div>
+      <!-- ハンバーガーメニュー END -->
+    </nav>
+  </div>
+
 {% endblock %}
 
+{% block script %}
+  <script src="{% static 'frontend/js/menu.js' %}"></script>
+{% endblock %}
