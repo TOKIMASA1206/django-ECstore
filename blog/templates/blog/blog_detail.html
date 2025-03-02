@@ -1,7 +1,36 @@
 {% extends 'base.html' %}
 
 {% block main %}
-  <h2>{{ post.title }}</h2>
-  <p>Published: {{ post.created_at }}</p>
-  <div>{{ post.content|linebreaks }}</div>
+<section>
+  <div class="container-fluid mb-5" style="margin-top:100px;">
+    <div class="row">
+      <div class="col-6 my-3">
+        <h1 class="section_title">Blog</h1>
+      </div>
+      <div class="col-6 my-3 text-right align-middle">
+        <a href="{% url 'blog_list' %}" class="btn btn-dark">Back</a>
+      </div>  
+    </div>
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col">
+              <h2>{{ post.title }}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <p>{{ post.created_at|date:"F j, Y" }}</p>
+          {% if post.featured_image %}
+          <p class="mb-4 text-center">
+            <img src="{{ post.featured_image.url }}" alt="Featured Image" class="w-100 h-100" style="max-width: 1000px;">
+          </p>
+          {% endif %}
+          <div>{{ post.content|linebreaks }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 {% endblock %}

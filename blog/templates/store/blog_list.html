@@ -11,18 +11,23 @@
         <a href="{% url 'blog_add' %}" class="btn btn-dark">Create New Post</a>
       </div>  
     </div>
-  {% for post in posts %}
-    <div class="col-6 col-md-4 col-lg-3 my-2">
-      {% include 'snippets/blog_box.html' %} 
+
+    <div class="row">
+      {% for post in posts %}
+        <div class="col-6 col-md-4 col-lg-3 my-2">
+          {% include 'snippets/store/blog_box.html' %} 
+        </div>
+      {% empty %}
+      
+      <div class="text-center mb-5">
+        <p class="inform_icon">
+          <i class="fa-solid fa-cat"></i>
+        </p>
+        <p class="h3 mb-4">No blog posts yet.</p>
+      </div>
+      {% endfor %}
     </div>
-  {% empty %}
-    <div class="text-center mb-5">
-      <p class="inform_icon">
-        <i class="fa-solid fa-cat"></i>
-      </p>
-      <p class="h3 mb-4">No blog posts yet.</p>
-    </div>
-  {% endfor %}
+
   </div>
 </section>
 {% endblock %}

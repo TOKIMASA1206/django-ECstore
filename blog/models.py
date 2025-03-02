@@ -16,6 +16,13 @@ class BlogPost(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    featured_image = models.ImageField(
+    upload_to='blog/featured/', 
+    blank=True, 
+    null=True,
+    help_text="記事のメイン画像をアップロード"
+    )
 
     def save(self, *args, **kwargs):
         if not self.slug:

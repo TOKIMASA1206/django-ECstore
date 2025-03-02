@@ -4,14 +4,14 @@
 {% endblock %}
 <div class="card blog_post_content">
     {% if post.featured_image %}
-    <a href="{% url 'blog_detail' post.slug %}">
+    <a href="{% url 'blog_store_detail' post.slug %}">
       <img src="{{ post.featured_image.url }}" alt="Featured Image" class="blog_post_img">
     </a>  
     {% endif %}
     <div class="bg-light text-center text-secondary p-1">
       <div class="my-1 py-1">
         <div class="blog_post">
-          <h2 class="blog_post_title"><a href="{% url 'blog_detail' post.slug %}">{{ post.title }}</a></h2>
+          <h2 class="blog_post_title"><a href="{% url 'blog_store_detail' post.slug %}">{{ post.title }}</a></h2>
           <p class="blog_post_date">{{ post.created_at }}</p>
           <p class="blog_post_text">{{ post.content|truncatewords:1 }}</p>
         </div>   

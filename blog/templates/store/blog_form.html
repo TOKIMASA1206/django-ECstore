@@ -2,9 +2,9 @@
 
 {% block main %}
 <section>
-  <div class="container-fluid" style="margin-top:100px;">
+  <div class="container-fluid mb-5" style="margin-top:100px;">
     <h2>{% if object %}Edit{% else %}Add{% endif %} Blog Post</h2>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ form.as_p }}
       <button type="submit" class="btn btn-primary">Save</button>
