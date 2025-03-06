@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from .views import (
     BlogListView,
     BlogDetailView,
@@ -10,14 +10,15 @@ from .views import (
 )
 
 urlpatterns = [
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     # お客様側の公開ページ
     path('list/', BlogListView.as_view(), name='blog_list'),
-    path('post/<slug:slug>/', BlogDetailView.as_view(), name='blog_detail'),
+    path('post/<str:slug>/', BlogDetailView.as_view(), name='blog_detail'),
     
     # 店舗サイドの管理用ページ
     path('store/list/', AdminBlogListView.as_view(), name='blog_store_list'),
-    path('store/post/<slug:slug>/', AdminBlogDetailView.as_view(), name='blog_store_detail'),
+    path('store/post/<str:slug>/', AdminBlogDetailView.as_view(), name='blog_store_detail'),
     path('store/add/', BlogCreateView.as_view(), name='blog_add'),
-    path('store/edit/<slug:slug>/', BlogUpdateView.as_view(), name='blog_edit'),
-    path('store/delete/<slug:slug>/', BlogDeleteView.as_view(), name='blog_delete'),
+    path('store/edit/<str:slug>/', BlogUpdateView.as_view(), name='blog_edit'),
+    path('store/delete/<str:slug>/', BlogDeleteView.as_view(), name='blog_delete'),
 ]

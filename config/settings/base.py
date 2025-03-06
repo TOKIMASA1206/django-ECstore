@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base',
     'blog', 
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 # ミドルウェア
@@ -97,6 +99,19 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # メディアファイルの設定
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# CKEditor のアップロード先を指定
+CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# CKEditor の設定（オプション）
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 300,
+        'width': '100%',
+        # 画像アップロードを有効にするための設定も追加可能
+    },
+}
 
 # デフォルトの自動フィールド
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

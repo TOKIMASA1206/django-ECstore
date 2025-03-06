@@ -1,0 +1,106 @@
+body{
+  font-family: "Roboto Condensed", sans-serif !important;
+  font-weight: 600;
+  font-style: normal;
+  overflow-x: hidden;
+}
+
+a{
+  text-decoration: none !important;
+  font-weight: 600 !important;
+}
+table{
+  text-align: center;
+  white-space: nowrap;
+}
+th{
+  font-size: 16px;
+}
+
+td{
+  font-size: 14px;
+}
+
+ul,
+li{
+  list-style: none;
+}
+p{
+  font-weight: 500;
+}
+img{
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+
+:root {
+  --colorMain: #000;
+  --colorYellow: #FFD100;
+  --colorPurple: #4f5aec;
+  --colorPurpleHover: #8087de;
+  --colorGray: #F4F3F1;
+  --colorRed: #fa1810;
+  --colorBlack: #010f1c;
+  --colorWhite: #ffffff;
+}
+
+.bg-purple{
+  background-color: var(--colorPurple);
+}
+
+
+/* ===============  Common Style ============ */
+
+main{
+  margin-top: 110px;
+}
+
+section{
+  margin-top: 50px;
+}
+
+.section_title{
+  font-size: 28px;
+}
+
+.sub_title{
+  font-size: 22px;
+}
+
+.section_item{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+.container-fluid{
+  max-width: 1250px;
+}
+
+.inform_icon{
+  font-size: 200px;
+}
+
+.text-red{
+  color: var(--colorRed);
+}
+
+
+@media (max-width: 768px) {
+  
+  img{
+    width: 60px;
+    height: 60px;
+  }
+  th {
+    font-size: 14px;
+  }
+  td {
+    font-size: 12px;
+  }
+  a{
+    font-size: 14px;
+  }
+}

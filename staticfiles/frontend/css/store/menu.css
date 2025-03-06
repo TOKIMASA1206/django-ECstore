@@ -1,0 +1,20 @@
+
+
+.list-group-item{
+  color: var(--colorBlack);
+  transition: backgrond 0.5s ease;
+}
+.list-group-item:hover{
+  color: var(--colorBlack);
+  background: #020aeb0a !important;
+}
+.active{
+  background-color: var(--colorPurple) !important ;
+  color: var(--colorWhite) !important;
+  border:none;
+}
+.active:hover{
+  background-color: var(--colorPurple) !important ;
+  color: var(--colorWhite) !important;
+  border:none;
+}

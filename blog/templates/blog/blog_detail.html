@@ -12,7 +12,7 @@
       </div>  
     </div>
     <div class="col-12">
-      <div class="card">
+      <div class="card mb-5">
         <div class="card-header">
           <div class="row align-items-center">
             <div class="col">
@@ -27,7 +27,7 @@
             <img src="{{ post.featured_image.url }}" alt="Featured Image" class="w-100 h-100" style="max-width: 1000px;">
           </p>
           {% endif %}
-          <div>{{ post.content|linebreaks }}</div>
+          <div>{{ post.content|safe }}</div>
         </div>
       </div>
     </div>

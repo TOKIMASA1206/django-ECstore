@@ -1,7 +1,15 @@
+.blog_post{
+  font-size: 12px!important;
+}
+
+.blog_post p{
+  margin: 0;
+}
+
 .blog_post_title a {
-  font-size: 26px;
+  font-size: 20px !important;
+  margin: 0;
   color: var(--colorBlack);
-  margin-bottom: 8px;
 }
 
 .blog_post_title a:hover {
@@ -9,15 +17,9 @@
 }
 
 .blog_post_date {
-  font-size: 14px;
-  color: var(--colorPurple);
-  margin-bottom: 10px;
-}
-
-.blog_post_text {
-  font-size: 12px;
-  color: var(--colorBlack);
-  margin-bottom: 20px;
+  font-size: 12px !important;
+  text-align: right;
+  margin:0;
 }
 
 .blog_post_img {
@@ -43,11 +45,7 @@
   }
 
   .blog_post_date {
-    font-size: 12px;
-  }
-
-  .blog_post_text {
-    font-size: 10px;
+    font-size: 14px;
   }
 
   .blog_post_img {

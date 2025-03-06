@@ -1,5 +1,6 @@
 from django import forms
 from .models import BlogPost
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 class BlogPostForm(forms.ModelForm):
     class Meta:
@@ -8,13 +9,12 @@ class BlogPostForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(attrs={
                 'class': 'form-control',
+                'required': True,
                 'placeholder': 'Enter article title',
             }),
-            'content': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Enter article content',
-            }),
+            'content': CKEditorUploadingWidget(),
             'featured_image': forms.FileInput(attrs={
                 'class': 'form-control',
+                'required': True,
             }),
         }
