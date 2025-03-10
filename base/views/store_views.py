@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 # ===============================  USER  ==========================
 
-class AdminUserListView(ListView):
+class AdminUserListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = User
     template_name = 'store/pages/users/index.html'
     context_object_name = 'users'
@@ -25,7 +25,7 @@ class AdminUserListView(ListView):
     
 # =========================  ITEM  ================================= 
     
-class AdminItemListView(ListView):
+class AdminItemListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
     model = Item
     form_class = ItemForm 
     template_name = 'store/pages/items/index.html'

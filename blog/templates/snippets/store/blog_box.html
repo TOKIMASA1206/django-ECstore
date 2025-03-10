@@ -1,0 +1,16 @@
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/blog_box.css' %}" />
+{% endblock %}
+<div class="card blog_post_content mb-5">
+  {% if post.featured_image %}
+    <a href="{% url 'blog_store_detail' post.slug %}"><img src="{{ post.featured_image.url }}" alt="Featured Image" class="blog_post_img" /></a>
+  {% endif %}
+  <div class="bg-light text-secondary p-1">
+    <div class="blog_post">
+      <h2 class="blog_post_title"><a href="{% url 'blog_store_detail' post.slug %}">{{ post.title }}</a></h2>
+      <span>{{ post.content|truncatechars:80|safe }}</span>
+      <p class="blog_post_date">{{ post.created_at }}</p>
+    </div>
+  </div>
+</div>

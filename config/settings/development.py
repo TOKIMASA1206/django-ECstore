@@ -25,9 +25,5 @@ DATABASES = {
     }
 }
 
-# 静的ファイルの設定
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # その他の設定があればここに追加
