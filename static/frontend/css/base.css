@@ -23,7 +23,8 @@ p{
 :root {
   --colorMain: #0B0364;
   --colorYellow: #FFD100;
-  --colorPurple: #B7BAE7;
+  --colorPurple: #4f5aec;
+  --colorPurpleHover: #8087de;
   --colorGray: #F4F3F1;
   --colorRed: #fa1810;
   --colorBlack: #010f1c;
