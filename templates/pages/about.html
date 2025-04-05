@@ -46,6 +46,29 @@
         {% endif %}
       </div>
         <h2 class="section_title">Member</h2>
+
+        <div class="row section_item mt-3 mb-5">
+          {% for member in members %}
+            <div class="col-6 col-md-4 col-lg-4 my-2 p-0">
+              <div class="team_member_box">
+                {% if member.profile_image %}
+                  <img src="{{ member.profile_image.url }}" alt="{{ member.name }}" class="img-fluid">
+                {% else %}
+                  <i class="fa-solid fa-user-slash"></i>
+                {% endif %}
+                <h3 class="">{{ member.user.username }}</h3>
+                <span class="member_position">{{ member.position }}</span>
+                <p class="member_comment">{{ member.comment|linebreaksbr }}</p>
+              </div>
+            </div>
+          {% empty %}
+            <div class="col-12 text-center">
+              <p class="inform_icon">
+                <i class="fa-solid fa-user-slash"></i>
+              </p>
+              <p class="mb-3">No team members available.</p>
+            </div>
+          {% endfor %}
       </div>
     </div>
   </section>

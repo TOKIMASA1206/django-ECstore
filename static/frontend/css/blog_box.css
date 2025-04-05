@@ -31,7 +31,7 @@
 .blog_post_content {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  transition: box-shadow 0.3s ease;
+  transition: all 0.1s ease;
 }
 
 .blog_post_content:hover {
