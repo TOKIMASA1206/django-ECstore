@@ -1,0 +1,41 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+
+{% block main %}
+  <div class="col-9 p-3" style="margin: 0 auto;">
+    <div class="mb-2 text-right"><a href="{% url 'store_about_edit' about_item.id %}" class="btn-yellow"><i class="fa-solid fa-pen-to-square"></i></a></div>
+    <div class="about-banner mb-5">
+      {% if about_item.header_image %}
+        <img src="{{ about_item.header_image.url }}" alt="Header Image" class="img-fluid w-100" />
+      {% else %}
+        <img src="{% static 'images/top_view.jpg' %}" alt="Header Image" class="img-fluid w-100" />
+      {% endif %}
+    </div>
+    <h1 class="section_title">Our Story</h1>
+    <div class="row section_item my-3">
+      {% if about_item.store_description %}
+        <p>{{ about_item.store_description|linebreaksbr }}</p>
+      {% else %}
+        <div class="col-12 text-center">
+          <p class="inform_icon">
+            <i class="fa-solid fa-comment-slash"></i>
+          </p>
+          <p class="mb-3">We currently have no store description available. Our team is working diligently to update our information, Thank you for your patience.</p>
+        </div>
+      {% endif %}
+    </div>
+    <h1 class="section_title">Meet the Team</h1>
+    <div class="row section_item my-3">
+      {% if about_item.team_comment %}
+        <p>{{ about_item.team_comment|linebreaksbr }}</p>
+      {% else %}
+        <div class="col-12 text-center">
+          <p class="inform_icon">
+            <i class="fa-solid fa-comment-slash"></i>
+          </p>
+          <p class="mb-3">We currently have no store description available. Our team is working diligently to update our information, Thank you for your patience.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

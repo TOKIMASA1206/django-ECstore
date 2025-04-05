@@ -1,0 +1,76 @@
+
+{% extends 'admin_base.html' %}
+
+{% block main %}
+
+<div class="text-left mb-2">
+  <a href="{% url 'store_member_add' %}" class="btn btn-primary"><i class="fa-solid fa-plus"></i> Add Member</a>
+</div>
+  <table class="table table-hover align-middle bg-white border text-secondary table-category w-100 m-0">
+    <thead class="small text-light">
+      <tr class="bg-purple">
+        <th>Image</th>
+        <th>Name</th>
+        <th>Comment</th>
+        <th>Position</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody class="align-items-center">
+      {% for member in members %}
+        <tr>
+          <td class="align-middle">
+            {% if member.profile_image %}
+              <img src="{{ member.profile_image.url }}" alt="" />
+            {% else %}
+              <i class="fa-solid fa-image" style="font-size:58px;"></i>
+            {% endif %}
+          </td>
+          <td class="align-middle">{{ member.user.username }}</td>
+          <td class="align-middle">{{ member.comment|truncatechars:10 }}</td>
+          <td class="align-middle">{{ member.position }}</td>
+          <td class="align-middle">
+            <!-- Edit and delete buttons -->
+            <a href="{% url 'store_member_edit' member.id%}" class="btn-yellow"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a href="{% url 'store_member_delete' member.id%}" class="btn-red"><i class="fa-solid fa-trash-can"></i></a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No categories found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center">
+    {% if is_paginated %}
+      <nav aria-label="Page navigation">
+        <ul class="pagination">
+          {% if page_obj.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+            </li>
+          {% endif %}
+          {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <li class="page-item active">
+                <span class="page-link">{{ num }}</span>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          {% if page_obj.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+            </li>
+          {% endif %}
+        </ul>
+      </nav>
+    {% endif %}
+  </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'admin_base.html' %}
+
+{% block main %}
+<div class="col-9 p-3">
+  <h2 class="text-warning">Edit About Page</h2>
+  <p>Update the content of the about page below:</p>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if object and object.header_image %}
+      <img src="{{ object.header_image.url }}" alt="Profile Image" class="img-thumbnail mt-2" style="width:200px; height:100px;">
+    {% endif %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-warning">Save</button>
+    <a href="{% url 'store_about' %}" class="btn btn-secondary">Cancel</a>
+  </form>
+</div>
+{% endblock %}

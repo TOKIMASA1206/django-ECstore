@@ -2,7 +2,7 @@
   {% load static %}
   <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/blog_box.css' %}" />
 {% endblock %}
-<div class="card blog_post_content mb-5">
+<div class="blog_post_content mb-5">
   {% if post.featured_image %}
     <a href="{% url 'blog_store_detail' post.slug %}"><img src="{{ post.featured_image.url }}" alt="Featured Image" class="blog_post_img" /></a>
   {% endif %}

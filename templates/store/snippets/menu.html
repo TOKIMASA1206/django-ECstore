@@ -10,9 +10,8 @@
 {% url 'store_categories' as store_categories_url %}
 {% url 'store_tags' as store_tags_url %}
 {% url 'store_orders' as store_orders_url %}
-{% url 'store_item_add' as store_item_add_url %}
-{% url 'store_category_add' as store_category_add_url %}
-{% url 'store_tag_add' as store_tag_add_url %}
+{% url 'store_about' as store_about_url %}
+{% url 'store_members' as store_members_url %}
 
 
 
@@ -24,4 +23,6 @@
   <a href="{{ store_categories_url }}" class="list-group-item text-decoration-none {% if request.path == store_categories_url %}active{% endif %}"><i class="fa-solid fa-tags"></i> Categories</a>
   <a href="{{ store_tags_url }}" class="list-group-item text-decoration-none {% if request.path == store_tags_url %}active{% endif %}"><i class="fa-solid fa-tags"></i> Tags</a>
   <a href="{{ store_orders_url }}" class="list-group-item text-decoration-none {% if request.path == store_orders_url %}active{% endif %}"><i class="fa-solid fa-tags"></i> Orders</a>
+  <a href="{{ store_about_url }}" class="list-group-item text-decoration-none {% if request.path == store_about_url %}active{% endif %}"><i class="fa-solid fa-tags"></i> About</a>
+  <a href="{{ store_members_url }}" class="list-group-item text-decoration-none {% if request.path == store_members_url %}active{% endif %}"><i class="fa-solid fa-tags"></i> Members</a>
 </div>

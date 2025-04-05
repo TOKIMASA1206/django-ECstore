@@ -1,30 +1,52 @@
 {% extends 'base.html' %}
+{% block style %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'frontend/css/about.css' %}" />
+{% endblock %}
 
 {% block main %}
-  {% include 'snippets/headline.html' %}
-
   <section>
-    <div class="container-fluid">
-
-
+    <div class="container">
+      <div class="row">
+        <div class="my-3">
+          <h1 class="fs-4">About Us</h1>
+        </div>
+      </div>
+      <div class="about-banner mb-5">
+        {% if about_item.header_image %}
+          <img src="{{ about_item.header_image.url }}" alt="Header Image" class="img-fluid">
+        {% else %}
+          <img src="{% static 'images/top_view.jpg' %}" alt="Header Image" class="img-fluid"/>
+        {% endif %}
+      </div>
       <h1 class="section_title">Our Story</h1>
       <div class="row section_item my-3">
-        <p>
-          　Quiet Journeyは、「日常に静けさと落ち着きをもたらす服を提供する」というシンプルな目標のもとに誕生しました。自然への愛とゆっくりとしたライフスタイルからインスピレーションを受け、当ブランドは、穏やかで心地よい生活を象徴しています。すべての商品は、<span class="text-red">静寂と安らぎ</span>を感じられるようにデザインされており、現代社会の喧騒から一時的に離れるような、そんな平和なひとときをお届けしたいと考えています。新しい場所を探検するときも、家で静かな時間を楽しむときも、私たちはお客様の「<span class="text-red">旅</span>」がいつも穏やかであることを願っています。
-        </p>
+        {% if about_item.store_description %}
+          <p>{{ about_item.store_description|linebreaksbr }}</p>
+        {% else %}
+          <div class="col-12 text-center">
+            <p class="inform_icon">
+              <i class="fa-solid fa-comment-slash"></i>
+            </p>
+            <p class="mb-3">We currently have no store description available. Our team is working diligently to update our information, Thank you for your patience.</p>
+          </div>
+        {% endif %}
       </div>
       <h1 class="section_title">Meet the Team</h1>
       <div class="row section_item my-3">
-        <p>
-          　Quiet Journeyのチームは、ただの仲間ではありません。同じ価値観を共有する「家族」です。創業者である渡辺を中心に、デザイナー、職人、カスタマーサポートの専門家たちが力を合わせて、お客様の体験が私たちの目指す「穏やかな旅」を体現できるよう努めています。チームメンバーそれぞれが、サステナブルな素材の選定から、すべての注文に細やかな配慮を行うまで、独自の専門性を発揮しています。
-        </p>
-
-        <h2 class="sub_title">Member</h2>
-        
+        {% if about_item.team_comment %}
+          <p>{{ about_item.team_comment|linebreaksbr}}</p> 
+        {% else %}
+          <div class="col-12 text-center">
+            <p class="inform_icon">
+              <i class="fa-solid fa-comment-slash"></i>
+            </p>
+            <p class="mb-3">We currently have no store description available. Our team is working diligently to update our information, Thank you for your patience.</p>
+          </div>
+        {% endif %}
       </div>
-
-
-
+        <h2 class="section_title">Member</h2>
+      </div>
     </div>
   </section>
 {% endblock %}
