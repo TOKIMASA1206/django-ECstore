@@ -10,40 +10,9 @@ from django.urls import path, include
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('blog/', include('blog.urls')),
+    path('store/', include('base.urls')),
     path('ckeditor/', include('ckeditor_uploader.urls')),
-    
-    
-    #店舗オーナーサイド
-    # =======================  USER =========================
-    path('store/users/', views.AdminUserListView.as_view(), name='store_users'),
-    
-    # =======================  ITEM =========================
-    path('store/items/', views.AdminItemListView.as_view(), name='store_items'),
-    path('store/items/add/', views.AdminItemCreateView.as_view(), name='store_item_add'),
-    path('store/items/edit/<str:pk>/', views.AdminItemUpdateView.as_view(), name='store_item_edit'),
-    path('store/items/delete/<str:pk>/', views.AdminItemDeleteView.as_view(), name='store_item_delete'),
-    
-    # =======================  CATEGORY =========================
-    
-    path('store/categories/', views.AdminCategoryListView.as_view(), name='store_categories'),
-    path('store/categories/add/', views.AdminCategoryCreateView.as_view(), name='store_category_add'),
-    path('store/categories/edit/<slug:slug>/', views.AdminCategoryUpdateView.as_view(), name='store_category_edit'),
-    path('store/categories/delete/<slug:slug>/', views.AdminCategoryDeleteView.as_view(), name='store_category_delete'),
-    
-    # =======================  TAG =============================
-    
-    
-    path('store/tags/', views.AdminTagListView.as_view(), name='store_tags'),
-    path('store/tags/add/', views.AdminTagCreateView.as_view(), name='store_tag_add'),
-    path('store/tags/edit/<slug:slug>/', views.AdminTagUpdateView.as_view(), name='store_tag_edit'),
-    path('store/tags/delete/<slug:slug>/', views.AdminTagDeleteView.as_view(), name='store_tag_delete'),
-    
-    # =======================  ORDER =============================
-    
-    path('store/orders/', views.AdminOrderListView.as_view(), name='store_orders'),
-    
-    
-    
+      
     
     # Account
     path("login/", views.Login.as_view(), name="login"),

@@ -4,7 +4,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.conf import settings
 from django.http import HttpResponse
 from django.forms import inlineformset_factory
-from .models import Item, Image, Category, Tag
+from .models import Item, Image, Category, Tag, About, Member
  
  
 class UserCreationForm(forms.ModelForm):
@@ -148,3 +148,47 @@ ImageFormSet = inlineformset_factory(
         }),
     },
 )
+
+# AboutPageForm
+class AboutPageForm(forms.ModelForm):
+    class Meta:
+        model = About
+        fields = ['header_image', 'store_description', 'team_comment']
+        widgets = {
+            'header_image': forms.ClearableFileInput(attrs={
+                'class': 'form-control-file',
+            }),
+            'store_description': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter store description',
+                'rows': 3,
+            }),
+            'team_comment': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter team comment',
+                'rows': 3,
+            }),
+        }
+        
+class MemberForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ['user', 'profile_image', 'comment', 'position']      
+        widgets = {
+            'user': forms.Select(attrs={
+                'class': 'form-control',
+            }),
+            'profile_image': forms.ClearableFileInput(attrs={
+                'class': 'form-control-file',
+            }),
+            'comment': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter comment',
+                'rows': 3,
+            }),
+            'position': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter position',
+            }),
+        }  
+        
