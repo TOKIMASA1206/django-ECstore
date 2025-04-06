@@ -36,7 +36,8 @@ class AboutStoreListView(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # 通常は1件だけの想定
-        about_item = About.objects.first()
+        about_item, created = About.objects.get_or_create(defaults={
+        })
         context['about_item'] = about_item
         return context
     
