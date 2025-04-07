@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'blog', 
     'ckeditor',
     'ckeditor_uploader',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 # ミドルウェア

@@ -4,6 +4,7 @@ from django.utils.crypto import get_random_string
 import os
 from django.db.models import Q
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 #Search
 class ItemModelQuerySet(models.QuerySet):
