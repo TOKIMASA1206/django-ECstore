@@ -4,6 +4,7 @@ from django.utils.crypto import get_random_string
 import os
 from django.db.models import Q
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 #Search
 class ItemModelQuerySet(models.QuerySet):
@@ -31,8 +32,8 @@ class ItemModelManager(models.Manager):
 def create_id():
     return get_random_string(22)
 
-
-# # 画像のURLを保存
+#Cloudinaryで設定のため使っていない
+# #画像のURLを保存
 def upload_image_to(instance, filename):
 
     item_id = str(instance.item.id)
@@ -72,7 +73,8 @@ class Category(models.Model):
 
 # Imageのクラス
 class Image(models.Model):
-    image = models.ImageField(default="", blank=True, upload_to=upload_image_to)
+    # image = models.ImageField(default="", blank=True, upload_to=upload_image_to)
+    image = CloudinaryField('item image', folder='store/items', blank=True)
     item = models.ForeignKey(
     'Item', 
     on_delete=models.CASCADE, 

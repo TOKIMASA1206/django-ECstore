@@ -13,6 +13,27 @@ DEBUG = config('DEBUG', default=True, cast=bool)
 STRIPE_API_SECRET_KEY = config('STRIPE_API_SECRET_KEY')
 MY_URL = config('MY_URL')
 
+#cloudinaryを使うため、コメントアウト
+# DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
+
+# Cloudinary の低レベル API やテンプレートタグで設定が必要な場合は以下を有効にする
+import cloudinary
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+cloudinary.config(
+    cloud_name=config('CLOUDINARY_NAME'),
+    api_key=config('CLOUDINARY_API_KEY'),
+    api_secret=config('CLOUDINARY_API_SECRET'),
+)
+#Ckeditorの画像アップロード先を指定(これがないとうまくいかない)
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config('CLOUDINARY_NAME'),
+    'API_KEY': config('CLOUDINARY_API_KEY'),
+    'API_SECRET': config('CLOUDINARY_API_SECRET'),
+}
+
+
+
 # データベース設定
 DATABASES = {
     'default': {
