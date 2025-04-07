@@ -6,6 +6,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.utils.text import slugify
 from ckeditor_uploader.fields import RichTextUploadingField
+from cloudinary.models import CloudinaryField
 
 User = get_user_model()
 
@@ -18,11 +19,20 @@ class BlogPost(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     
-    featured_image = models.ImageField(
-    upload_to='blog/featured/', 
-    blank=True, 
-    null=True,
-    help_text="記事のメイン画像をアップロード"
+    # featured_image = models.ImageField(
+    # upload_to='blog/featured/', 
+    # blank=True, 
+    # null=True,
+    # help_text="記事のメイン画像をアップロード"
+    # )
+    
+    # Cloudinary を利用して記事のメイン画像をアップロード
+    featured_image = CloudinaryField(
+        "featured image", 
+        folder="blog/featured",  # アップロード先フォルダを指定
+        blank=True, 
+        null=True,
+        help_text="記事のメイン画像をアップロード"
     )
 
     def save(self, *args, **kwargs):

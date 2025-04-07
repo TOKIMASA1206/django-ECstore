@@ -103,7 +103,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # CKEditor のアップロード先を指定
-CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_UPLOAD_PATH = "uploads/blog/"
 
 # CKEditor の設定（オプション）
 CKEDITOR_CONFIGS = {
